@@ -81,9 +81,10 @@ arrowFunction("teste")
 //b)
 let arrowfunction2 = (valor1, valor2) => {
     let resultado = valor1 + valor2
+    arrowFunction(resultado)
 }
 
-arrowFunction(arrowfunction2(2,1))
+arrowfunction2(10,10)
 
 //2)
 function calculaTeoremaPitagoras(cateto1, cateto2){
