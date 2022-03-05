@@ -75,24 +75,23 @@
     }
     
     //mostra o resultado
-    function mostraResultado(){
-        const ganhou = (contaPontuacao(jogadorComputador) < contaPontuacao(jogadorUsuario) || contaPontuacao(jogadorComputador) > 21) && contaPontuacao(jogadorUsuario) <= 21
-        const perdeu = (contaPontuacao(jogadorComputador) > contaPontuacao(jogadorUsuario) || contaPontuacao(jogadorUsuario) > 21) && contaPontuacao(jogadorComputador) <= 21
-        const empate = contaPontuacao(jogadorComputador) === contaPontuacao(jogadorUsuario)
-    
-        if(empate){
-            alert(`Suas cartas são "${mostrarCartas(jogadorUsuario)}" . Sua pontuação é "${contaPontuacao(jogadorUsuario)}".\n` +
-            `As cartas do computador são "${mostrarCartas(jogadorComputador)}" . A pontuação do computador é "${contaPontuacao(jogadorComputador)}".\n` +
-            "Empate!")
-            }
-         else if(perdeu){
-            alert(`Suas cartas são "${mostrarCartas(jogadorUsuario)}" . Sua pontuação é "${contaPontuacao(jogadorUsuario)}".\n` +
-            `As cartas do computador são "${mostrarCartas(jogadorComputador)}" . A pontuação do computador é "${contaPontuacao(jogadorComputador)}".\n` +
-            "O computador ganhou!")
-            }
-         else if(ganhou){
-            alert(`Suas cartas são "${mostrarCartas(jogadorUsuario)}" . Sua pontuação é "${contaPontuacao(jogadorUsuario)}".\n` +
-            `As cartas do computador são "${mostrarCartas(jogadorComputador)}" . A pontuação do computador é "${contaPontuacao(jogadorComputador)}".\n` +
-            "O usuário ganhou!")
-            }
-    }
+function mostraResultado(){
+   let vencedor = "";
+   const ganhou = (contaPontuacao(jogadorComputador) < contaPontuacao(jogadorUsuario) || contaPontuacao(jogadorComputador) > 21) && contaPontuacao(jogadorUsuario) <= 21
+   const perdeu = (contaPontuacao(jogadorComputador) > contaPontuacao(jogadorUsuario) || contaPontuacao(jogadorUsuario) > 21) && contaPontuacao(jogadorComputador) <= 21
+   const empate = contaPontuacao(jogadorComputador) === contaPontuacao(jogadorUsuario)
+
+   if(empate){
+       vencedor = "Empate!"
+       }
+    else if(perdeu){
+       vencedor = "O computador ganhou!"
+       }
+    else if(ganhou){
+      vencedor = "O usuário ganhou!"
+       }
+
+       alert(`Suas cartas são "${mostrarCartas(jogadorUsuario)}" . Sua pontuação é "${contaPontuacao(jogadorUsuario)}".\n` +
+       `As cartas do computador são "${mostrarCartas(jogadorComputador)}" . A pontuação do computador é "${contaPontuacao(jogadorComputador)}".\n` +
+       `${vencedor}`)
+}

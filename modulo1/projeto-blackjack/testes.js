@@ -2,10 +2,14 @@ let jogadorUsuario = []
 let jogadorComputador = []
 
 //Jogo rodando
+alert("Boas vindas ao jogo de Blackjack")
+if(confirm("deseja iniciar uma nova rodada ?")){
 iniciarJogo()
 IniciarRodada()
 mostraResultado()
-
+}else{
+   alert("O jogo acabou!")
+}
 
 //Inicia o jogo e verifica cartas iniciais
 function iniciarJogo(){
@@ -59,23 +63,22 @@ function IniciarRodada(){
 
 //mostra o resultado
 function mostraResultado(){
+    let vencedor = "";
     const ganhou = (contaPontuacao(jogadorComputador) < contaPontuacao(jogadorUsuario) || contaPontuacao(jogadorComputador) > 21) && contaPontuacao(jogadorUsuario) <= 21
     const perdeu = (contaPontuacao(jogadorComputador) > contaPontuacao(jogadorUsuario) || contaPontuacao(jogadorUsuario) > 21) && contaPontuacao(jogadorComputador) <= 21
     const empate = contaPontuacao(jogadorComputador) === contaPontuacao(jogadorUsuario)
 
     if(empate){
-        alert(`Suas cartas são "${mostrarCartas(jogadorUsuario)}" . Sua pontuação é "${contaPontuacao(jogadorUsuario)}".\n` +
-        `As cartas do computador são "${mostrarCartas(jogadorComputador)}" . A pontuação do computador é "${contaPontuacao(jogadorComputador)}".\n` +
-        "Empate!")
+        vencedor = "Empate!"
         }
      else if(perdeu){
-        alert(`Suas cartas são "${mostrarCartas(jogadorUsuario)}" . Sua pontuação é "${contaPontuacao(jogadorUsuario)}".\n` +
-        `As cartas do computador são "${mostrarCartas(jogadorComputador)}" . A pontuação do computador é "${contaPontuacao(jogadorComputador)}".\n` +
-        "O computador ganhou!")
+        vencedor = "O computador ganhou!"
         }
      else if(ganhou){
+       vencedor = "O usuário ganhou!"
+        }
+
         alert(`Suas cartas são "${mostrarCartas(jogadorUsuario)}" . Sua pontuação é "${contaPontuacao(jogadorUsuario)}".\n` +
         `As cartas do computador são "${mostrarCartas(jogadorComputador)}" . A pontuação do computador é "${contaPontuacao(jogadorComputador)}".\n` +
-        "O usuário ganhou!")
-        }
+        `${vencedor}`)
 }
