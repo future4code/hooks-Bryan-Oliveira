@@ -66,6 +66,19 @@ for(let i =0; i<arrayOriginal.length; i++ ){
 }
 console.log(arrayOriginalComString)
 
+//e)
+let numMaior = 0
+let numMenor = arrayOriginal[0]
+
+for(let iten of arrayOriginal){
+    if(iten > numMaior){
+        numMaior = iten
+    }else if(iten < numMenor){
+        numMenor = iten
+    }
+}
+console.log(`o maior número do array é ${numMaior} e o menor é ${numMenor}`)
+
 // //DESAFIOS:
 
 // //1)
