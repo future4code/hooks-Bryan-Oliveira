@@ -127,22 +127,19 @@ const pets = [
  console.log(pokemonsEmOrdemAlfabetica)
 
  //b)
- const tiposPokemon = pokemons.map(poke =>{
-     return poke.tipo
- })
+let tipos = []
 
-let tipos = [tiposPokemon[0]]
+for(let poke of pokemons){
+   let contador = 0
+   for(let tipo of tipos){
+      if(poke.tipo === tipo){
+         contador++
+      }
+   }
+   console.log(contador)
+   if(contador < 1){
+      tipos.push(poke.tipo)
+   }
+}
 
- for(let i=0; i<tiposPokemon.length; i++){
-     let contador = 0 
-    for(let c=0; c<tipos.length;c++){
-        if(tipos[c] === tiposPokemon[i]){
-             contador++
-         }
-     }
-     if(contador < 1){
-         tipos.push(tiposPokemon[i])
-     }
- }
-
- console.log(tipos)
+console.log(tipos)
