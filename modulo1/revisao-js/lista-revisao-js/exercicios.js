@@ -207,10 +207,46 @@ function retornaContasComSaldoAtualizado(contas) {
 
 // EXERCÍCIO 15A
 function retornaArrayOrdenadoAlfabeticamente(consultas) {
-  
+  return consultas.sort( (a,b) => {
+    if (a.nome < b.nome) {
+        return -1;
+      }
+      if (a.nome > b.nome) {
+        return 1;
+      }
+      return 0;
+    })
 }
 
 // EXERCÍCIO 15B
 function retornaArrayOrdenadoPorData(consultas) {
-   
-}
+
+    for(let item of consultas){     
+        let valoresData = item.dataDaConsulta.split("/")
+        let dataFormatoAmericano = `${valoresData[1]}/${valoresData[0]}/${valoresData[2]}`
+    
+        console.log(valoresData)
+        item.dataDaConsulta = dataFormatoAmericano
+    }
+        
+    consultas.sort( (a,b) => {
+
+        let dataComparada1 = new Date(`${a.dataDaConsulta}`)
+        let dataComparada2 = new Date(`${b.dataDaConsulta}`)
+
+        console.log(dataComparada1, dataComparada2)
+
+        return  dataComparada1.getTime() - dataComparada2.getTime()
+    })
+
+    for(let item of consultas){     
+        let valoresData = item.dataDaConsulta.split("/")
+        let dataFormatoAmericano = `${valoresData[1]}/${valoresData[0]}/${valoresData[2]}`
+    
+        console.log(valoresData)
+        item.dataDaConsulta = dataFormatoAmericano
+    }
+
+    return consultas
+
+    }
