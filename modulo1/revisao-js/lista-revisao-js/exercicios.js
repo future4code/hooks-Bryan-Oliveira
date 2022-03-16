@@ -106,10 +106,8 @@ function retornaSegundoMaiorESegundoMenor(array) {
     array.sort((a,b)=>{
         return a-b
     })
-    if(array.length >= 4){
+    if(array.length >= 2){
         return [array[array.length-2], array[1]]
-    }else if(array.length === 3){
-        return [array[1], array[1]]
     }else{
         return [array[0], array[0]]
     }
