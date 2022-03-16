@@ -21,12 +21,40 @@ function retornaArrayInvertido(array) {
 
 // EXERCÍCIO 03
 function retornaArrayOrdenado(array) {
-  
+    let novoArray = []
+    for(let item of array){
+        let menorNumero = null
+        for(let number of array){
+            if(menorNumero === null){
+                menorNumero = item
+            }
+
+            if(menorNumero > number){
+                let contador = 0
+                for(let i=0; i<novoArray.length+1; i++){
+                    if(number === novoArray[i]){
+                        contador++
+                    }
+                if(contador === 0){
+                    menorNumero = number
+                }
+                }
+            }
+    }
+    novoArray.push(menorNumero)
+  }
+  return novoArray
 }
 
 // EXERCÍCIO 04
 function retornaNumerosPares(array) {
-  
+  let numerosPares= []
+  for(item of array){
+      if (item % 2 ===0){
+          numerosPares.push(item)
+      }
+  }
+  return numerosPares
 }
 
 // EXERCÍCIO 05
