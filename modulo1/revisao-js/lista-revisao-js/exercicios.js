@@ -103,60 +103,16 @@ function classificaTriangulo(ladoA, ladoB, ladoC) {
 
 // EXERCÍCIO 10
 function retornaSegundoMaiorESegundoMenor(array) {
-
+    array.sort((a,b)=>{
+        return a-b
+    })
     if(array.length >= 4){
-        let menorNumero = array[0]
-        let maiorNumero = array[0]
-        let indexMaiorNumero = 0
-        let indexMenorNumero = 0
-        
-        for(let i=0; i<array.length;i++){
-            if(array[i]< menorNumero){
-                menorNumero = array[i]
-                indexMenorNumero = i
-            }
-        }
-
-        array.splice(indexMenorNumero ,1)
-
-        for(let i=0; i<array.length;i++){
-            if (array[i]> maiorNumero){
-                maiorNumero = array[i]
-                indexMaiorNumero = i
-            }
-        }
-        array.splice(indexMaiorNumero ,1)
-
-        let segundoMenorNumero = array[0]
-        let segundoMaiorNumero = retornaMaiorNumero(array)
-        
-        for(numero of array){
-            if(numero<segundoMenorNumero){
-                segundoMenorNumero = numero
-            }
-        }
-        
-        return [segundoMaiorNumero, segundoMenorNumero]
+        return [array[array.length-2], array[1]]
     }else if(array.length === 3){
-
-        let menorNumero = array[0]
-        let maiorNumero = array[0]
-        
-        for(let i=0; i<array.length;i++){
-            if(array[i]< menorNumero){
-                menorNumero = array[i]
-                indexMenorNumero = i
-            }
-        }
-
-        for(let i=0; i<array.length;i++){
-            if (array[i]> maiorNumero){
-                maiorNumero = array[i]
-                indexMaiorNumero = i
-            }
-        }
+        return [array[1], array[1]]
+    }else{
+        return [array[0], array[0]]
     }
-    
 }
 
 // EXERCÍCIO 11
