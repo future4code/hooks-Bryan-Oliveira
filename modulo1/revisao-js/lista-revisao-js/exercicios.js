@@ -22,27 +22,19 @@ function retornaArrayInvertido(array) {
 // EXERCÍCIO 03
 function retornaArrayOrdenado(array) {
     let novoArray = []
-    for(let item of array){
-        let menorNumero = null
-        for(let number of array){
-            if(menorNumero === null){
-                menorNumero = item
-            }
-
-            if(menorNumero > number){
-                let contador = 0
-                for(let i=0; i<novoArray.length+1; i++){
-                    if(number === novoArray[i]){
-                        contador++
-                    }
-                if(contador === 0){
-                    menorNumero = number
-                }
+        while(array.length > 1){
+            let menorNumero = array[0]
+            let index = 0
+            for(let i=0; i<array.length;i++){
+                if(array[i]< menorNumero){
+                    menorNumero = array[i]
+                    index = i
                 }
             }
+            novoArray.push(menorNumero)
+            array.splice(index ,1)
     }
-    novoArray.push(menorNumero)
-  }
+    novoArray.push(array[0])
   return novoArray
 }
 
@@ -59,10 +51,10 @@ function retornaNumerosPares(array) {
 
 // EXERCÍCIO 05
 function retornaNumerosParesElevadosADois(array) {
- return array.map(item=>{
-     return item * item
+    return array.map(item=>{
+        return item * item
  }).filter(numero =>{
-     return numero %2===0
+        return numero %2===0
  })
 }
 
