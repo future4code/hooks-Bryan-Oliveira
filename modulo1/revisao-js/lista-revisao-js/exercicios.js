@@ -103,17 +103,78 @@ function classificaTriangulo(ladoA, ladoB, ladoC) {
 
 // EXERCÍCIO 10
 function retornaSegundoMaiorESegundoMenor(array) {
-  
+
+    if(array.length >= 4){
+        let menorNumero = array[0]
+        let maiorNumero = array[0]
+        let indexMaiorNumero = 0
+        let indexMenorNumero = 0
+        
+        for(let i=0; i<array.length;i++){
+            if(array[i]< menorNumero){
+                menorNumero = array[i]
+                indexMenorNumero = i
+            }
+        }
+
+        array.splice(indexMenorNumero ,1)
+
+        for(let i=0; i<array.length;i++){
+            if (array[i]> maiorNumero){
+                maiorNumero = array[i]
+                indexMaiorNumero = i
+            }
+        }
+        array.splice(indexMaiorNumero ,1)
+
+        let segundoMenorNumero = array[0]
+        let segundoMaiorNumero = retornaMaiorNumero(array)
+        
+        for(numero of array){
+            if(numero<segundoMenorNumero){
+                segundoMenorNumero = numero
+            }
+        }
+        
+        return [segundoMaiorNumero, segundoMenorNumero]
+    }else if(array.length === 3){
+
+        let menorNumero = array[0]
+        let maiorNumero = array[0]
+        
+        for(let i=0; i<array.length;i++){
+            if(array[i]< menorNumero){
+                menorNumero = array[i]
+                indexMenorNumero = i
+            }
+        }
+
+        for(let i=0; i<array.length;i++){
+            if (array[i]> maiorNumero){
+                maiorNumero = array[i]
+                indexMaiorNumero = i
+            }
+        }
+    }
+    
 }
 
 // EXERCÍCIO 11
 function retornaChamadaDeFilme(filme) {
-   
+    let atores = ""
+    for(let i =0;i<filme.atores.length-1; i++){
+        atores +=  filme.atores[i] + ", "  
+        }
+   return `Venha assistir ao filme ${filme.nome}, de ${filme.ano}, dirigido por ${filme.diretor} e estrelado por ${atores} ${filme.atores[filme.atores.length-1]}.`
 }
 
 // EXERCÍCIO 12
 function retornaPessoaAnonimizada(pessoa) {
-   
+   let novaPessoa = {
+       ...pessoa,
+       nome:"ANÔNIMO"
+   }
+   return novaPessoa
 }
 
 // EXERCÍCIO 13A
