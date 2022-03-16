@@ -59,7 +59,11 @@ function retornaNumerosPares(array) {
 
 // EXERCÍCIO 05
 function retornaNumerosParesElevadosADois(array) {
- 
+ return array.map(item=>{
+     return item * item
+ }).filter(numero =>{
+     return numero %2===0
+ })
 }
 
 // EXERCÍCIO 06
