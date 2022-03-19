@@ -51,16 +51,14 @@ function retornaNumerosPares(array) {
 
 // EXERCÍCIO 05
 function retornaNumerosParesElevadosADois(array) {
-    return array.map(item=>{
+    return retornaNumerosPares(array).map(item=>{
         return item * item
- }).filter(numero =>{
-        return numero %2===0
  })
 }
 
 // EXERCÍCIO 06
 function retornaMaiorNumero(array) {
-  let maiorNumero = array[0]
+  let maiorNumero = Number.NEGATIVE_INFINITY
   for(numero of array){
       if(numero>maiorNumero){
           maiorNumero = numero
@@ -81,7 +79,7 @@ function retornaObjetoEntreDoisNumeros(num1, num2) {
 
 // EXERCÍCIO 08
 function retornaNPrimeirosPares(n) {
-   let nNumerosPares = []
+    let nNumerosPares = []
     for(let i=0; i<n; i++){
         nNumerosPares.push(i*2)
    }
@@ -116,7 +114,7 @@ function retornaChamadaDeFilme(filme) {
     for(let i =0;i<filme.atores.length-1; i++){
         atores +=  filme.atores[i] + ", "  
         }
-   return `Venha assistir ao filme ${filme.nome}, de ${filme.ano}, dirigido por ${filme.diretor} e estrelado por ${atores}${filme.atores[filme.atores.length-1]}.`
+    return `Venha assistir ao filme ${filme.nome}, de ${filme.ano}, dirigido por ${filme.diretor} e estrelado por ${atores}${filme.atores[filme.atores.length-1]}.`
 }
 
 // EXERCÍCIO 12
