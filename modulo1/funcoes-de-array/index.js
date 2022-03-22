@@ -118,6 +118,19 @@ const pets = [
  ]
 
  //a)
+const testandoSort = pokemons.sort((elemento1,elemento2)=>{
+   if (elemento1.nome < elemento2.nome) {
+      return -1;
+    }
+    if (elemento1.nome < elemento2.nome) {
+      return 1;
+    }
+    return 0;
+})
+
+console.log(testandoSort)
+
+
  const nomePokemons = pokemons.map(poke =>{
      return poke.nome
  })
@@ -136,7 +149,6 @@ for(let poke of pokemons){
          contador++
       }
    }
-   console.log(contador)
    if(contador < 1){
       tipos.push(poke.tipo)
    }

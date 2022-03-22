@@ -1,0 +1,21 @@
+Faça um resumo sobre quais são os 7 passos fundamentais para a resolução de problemas e como eles podem nos ajudar a solucionar nossos desafios de programação.
+
+Nessa aula aprendemos passos para resolver problemas, os quais são norteiam nós desenvolvedores naquele momento em que enfrentamos um problema e congelamos.
+
+E quais são esses passos tão importantes?
+
+1)ler atentamente o enunciado: o que também pode ser traduzido como entender realmente o problema. Qual problema eu como desenvolvedor deve solucionar?
+
+2)separar informações relevantes: quais são as informações chaves para a solução?
+
+3)pensar em entradas e saídas: quais são os dados a serem tratados? de que maneira eles devem ser enviados?
+
+4)fazer um esquema visual: pode ser um fluxograma ou até mesmo um desenho simples cm papel e caneta, mas que seja uma maneira mais fácil de visualizar o programa
+
+5)criar um código funcional: criar um programa que resolva o problema, ainda que não seja o melhor código do mundo.
+
+6)testar força bruta: testar sem rodar o código diretamente onde será utilizado.
+
+7)refatorar: tornar o código mais limpo e entendível.
+
+Utilizando esses passos é possível quebrar o problema em partes, deste modo fica mais fácil resolve-lo
