@@ -1,0 +1,17 @@
+.formulario-add-produto{
+    position:relative;
+    /* background-color: aqua; */
+}
+
+.formulario-add-produto{
+
+    border-radius: 15px;
+    position: relative;
+    text-align: center;
+    color: #696969;
+    align-items: center;
+    line-height: 50px;
+}
+h2{
+    margin: 0;
+}
