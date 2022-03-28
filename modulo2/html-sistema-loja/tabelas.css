@@ -1,0 +1,19 @@
+.tabela{
+    align-content: center;
+    text-align: center;
+}
+
+.tabela th{
+    text-align: center;
+    background-color: #696969;
+    color: white;
+}
+
+.tabela td{
+border-right: 1px solid #696969;
+border-bottom: 1px solid #696969;
+}
+
+table{
+    margin: auto;
+}

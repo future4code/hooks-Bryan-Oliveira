@@ -1,0 +1,54 @@
+.rodape{
+    background-color: #696969;
+    /* alinhando rodape */
+    padding: 5px 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.cabecalho{
+    background-color: #696969;
+    /* alinhando cabeçalho */
+    padding: 5px 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+.navegacao{
+    list-style: none;
+}
+
+.navegacao ul li{
+    padding: 0px;
+    margin: 0px;
+    display: inline;
+}
+
+.navegacao ul li a{
+	padding: 2px 10px;
+	display: inline-block;
+    text-decoration: none;
+
+    /* estilização */
+    color: orange;
+    border-bottom:3px solid black;
+}
+
+.navegacao ul li a:hover {
+	background-color:#D6D6D6;
+	color: #6D6D6D;
+	border-bottom:3px solid #EA0000;
+}
+
+.rodape div a :hover{
+    background-color:#D6D6D6;
+}
+
+.rodape {
+    
+  }
