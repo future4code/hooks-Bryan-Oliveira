@@ -1,0 +1,37 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+h1, h2, h3, h4, h5, h6, p{
+    color: orange;
+}
+
+.texto-com-background{
+    background-color:yellow ;
+}
+
+.texto-com-outra-cor{
+    color: green
+}
+
+button:hover{
+    background-color: red;
+    color: white
+}
+
+button:active{
+    background-color: pink;
+    color: red
+}
+
+div{
+    margin-top: 1000px;
+    text-align: center;
+}
+
+header{
+    position: fixed;
+    top: 0;
+    right: 50vw;
+}
