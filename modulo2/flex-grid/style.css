@@ -1,0 +1,115 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+/* header */
+
+header{
+    padding: 10px;
+    background-color: mediumvioletred;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img{
+    width: 25px;
+    height: 25px;
+}
+
+.logo {
+    width: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1{
+    font-size: 20px;
+}
+
+header button{
+    height: 20px;
+    width: 45px;
+}
+/* main */
+
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    align-items: stretch;
+    column-gap: 20px;
+}
+
+.cards-bolos{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    row-gap: 20px;
+    column-gap: 20px;
+}
+
+.card-bolo img{
+    width: 100%;
+    height: 100%;
+}
+
+.card-bolo .img{
+    padding-top: 20px;
+}
+
+.card-bolo .descricao-bolo{
+    box-shadow: 2px 2px 2px darkgray;
+    text-align: center;
+    align-self: center;
+}
+
+
+/* nav */
+nav{
+    background-color: #f2d0e0;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+nav img{
+    width: 15px;
+    height: 15px;
+}
+
+.nav{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.nav div{
+    display: flex;
+    padding: 7px;
+}
+
+.nav div img{
+    margin-right: 7px;
+}
+
+
+
+/* footer */
+
+footer{
+    background-color: mediumvioletred;
+    text-align: center;
+}
