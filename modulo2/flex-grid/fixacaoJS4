@@ -1,0 +1,14 @@
+```
+function contaOcorrencias(arrayDeNumeros, numeroEscolhido) {
+  let contador = 0
+  for(numero of arrayDeNumeros){
+    if(numeroEscolhido === numero){
+      contador ++
+    }
+  }
+  if(contador > 0){
+    return `O número ${numeroEscolhido} aparece ${contador}x`
+  }
+  return "Número não encontrado"
+}
+```
