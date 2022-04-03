@@ -4,20 +4,138 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css"
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="contato.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Roboto+Condensed:wght@300&family=Roboto+Slab:wght@100;300&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
-        <p>logo ou ft</p>
-        <div id="nav"></div>
+        <h1>Bryan Fernandes</h1>
+        <nav id="nav-cabecalho">
+            <a href="index.html">HOME</a>
+            <a href="index.html">SOBRE</a>
+            <a href="contato.html">CONTATO</a>
+        </nav>
     </header>
+    
+    <main>
+        <div>
+            <h2>Entre em contato</h2>
+            <h3>Mande sua mensagem que responderei assim que possível</h3>
 
+            <div>
+                <form action="">
+                    <div id="form-inputs">
+                        <div class="form-input">
+                            <label for="nome">NOME</label>
+                            <INput type="text" name="nome" id="nome"></INput>
+                        </div>
+                        <div class="form-input">
+                            <label for="email" >EMAIL</label>
+                            <INput type="email" name="email" id="email"></INput>    
+                        </div>
+                        <div class="form-input">
+                            <label for="numero">NÚMERO</label>
+                            <INPut type="tel" name="numero" id="numero"></INPut>
+                        </div>
+                    </div>
+
+                    <label for="mensagem">MENSAGEM</label>
+                    <textarea name="mensagem" id="mensagem" cols="30" rows="10"></textarea>
+                </form>
+            </div>
+        </div>
+
+    </main>
     <footer>
-        <div id="redes-sociais"></div>
-        <div id="nav-rodape"></div>
-        <div id="descricao-rodape"></div>
+    
+        <div id="redes-sociais-rodape">
+            <a href="https://www.linkedin.com/in/bryan-fernandes-de-oliveira-8085671a8/" target="_blank">
+                <div class="redes-sociais">
+                    <div>
+                        <img class="icone-redes-sociais" src="./imagens/icones/linkedin.png" alt="icone-linkedin">
+                        <h4>LINKEDIN</h4>
+                    </div>
+                    <p>Conecte-se comigo</p>
+                </div>
+            </a>
+            
+            <a href="https://github.com/bammido" target="_blank">
+                <div class="redes-sociais">
+                    <div>
+                        <img class="icone-redes-sociais" src="./imagens/icones/github.png" alt="icone-github">
+                        <h4>GITHUB</h4>
+                    </div>
+                    <p>De uma olhada nos projetos, e apoie nos open source</p>
+                </div>
+            </a>
+            
+            <a href="https://api.whatsapp.com/send?phone=5584996495206&text=Ol%C3%A1%20Bryan..." target="_blank">
+                <div class="redes-sociais">
+                    <div>
+                        <img class="icone-redes-sociais" src="./imagens/icones/whatsapp.png" alt="icone-whatsapp">
+                        <h4>WHATSAPP</h4>
+                    </div>
+                    <p>Mande mensagem querendo fechar parceria ou buscando informações do meu trabalho</p>
+                </div>
+            </a>
+            
+            <a href="mailto:bryanfernandes8@gmail.com" target="_blank">
+                <div class="redes-sociais">
+                    <div>
+                        <img class="icone-redes-sociais" src="./imagens/icones/email.png" alt="icone-email">
+                        <h4>EMAIL</h4>
+                    </div>
+                    <p>Meu email para contato</p>
+                </div>
+            </a>
+            
+        </div>
+        
+        <nav id="projetos-rodape">
+            <h3>projetos</h3>
+            
+            <div>
+                <a href="projeto-blackjack.html">
+                    <div class="projetos-rodape">
+                        <h4>BLACKJACK</h4>
+                    </div> 
+                </a>
+            </div>
+        </nav>
+
+        <nav id="nav-rodape">
+            <a href="index.html">
+                <div class="nav-rodape">
+                    <h4>SOBRE</h4>
+                    <p>Sobre mim</p>
+                </div>
+            </a>
+
+            <a href="contato.html">
+                <div class="nav-rodape">
+                    <h4>CONTATO</h4>
+                    <p>Entre em contato</p>
+                </div>
+            </a>
+
+            <a href="https://www.linkedin.com/in/bryan-fernandes-de-oliveira-8085671a8/" target="_blank">
+                <div class="nav-rodape">
+                    <h4>ME CONTRATE</h4>
+                    <p>Procura meus serviços? entre em contato</p>
+                </div>
+            </a>
+            
+        </nav>
+                        
+        <div id="descricao-rodape">
+            <h3> Bryan Fernandes de Oliveira - Full Stack developer</h2>
+            <p> Amante de tecnologias inovadoras e deasfios engrandecedores</p>
+        </div>
     </footer>
 
 </body>

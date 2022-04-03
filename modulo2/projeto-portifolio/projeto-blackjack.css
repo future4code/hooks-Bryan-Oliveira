@@ -1,0 +1,9 @@
+main section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main h3{
+    background-color: lightgray;
+}
