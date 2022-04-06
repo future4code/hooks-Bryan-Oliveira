@@ -3,6 +3,11 @@
     padding: 0;
 }
 
+a{
+    text-decoration: none;
+    color: aliceblue;
+}
+
 body{
     background-color: #202020;
 }
@@ -12,10 +17,11 @@ header{
     width: 100%;
     justify-content: flex-start;
     background-color: #202020;
-    color: whitesmoke;
+    color: aliceblue;
     justify-content: center;
     border-bottom: 3px solid #4D4D4D;
     height: 12%;
+    align-items: center;
 }
 
 .div-header{
@@ -23,6 +29,10 @@ header{
     align-items: center;
     justify-content: space-between;
     margin: 0 10px;
+}
+
+#logo img{
+    margin: 0 5px;
 }
 
 .div-header img {
@@ -48,12 +58,21 @@ header{
 }
 
 #pesquisa input{
-    background-color: whitesmoke;
+    background-color: aliceblue;
     border-color: black;
     border-radius: 3px;
 }
 
-main{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+footer{
+    border-top: 3px solid #4D4D4D;
+    color: aliceblue;
+    text-align: center;
+    padding: 25px;
 }

@@ -1,0 +1,23 @@
+main{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 25px;
+    row-gap: 10px;
+    margin-left: 25px;
+    justify-items: center;
+    align-items: center;
+}
+
+a{
+    text-decoration: none;
+    color: aliceblue;
+}
+.card-video{
+    margin-top: 25px;
+    text-align: center;
+}
+.card-video div img{
+    width: 100%;
+    border: 1px solid #4D4D4D;
+    border-radius: 5px;
+}
