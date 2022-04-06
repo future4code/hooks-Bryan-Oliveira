@@ -46,6 +46,10 @@ header{
 
 #pesquisa{
     width: 30%;
+    height: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #pesquisa button{
@@ -54,13 +58,16 @@ header{
 }
 
 #pesquisa label{
-    flex-grow: 1;
+    /* flex-grow: 1; */
+    /* max-width: 50%; */
+    height: 100%;
 }
 
 #pesquisa input{
     background-color: aliceblue;
     border-color: black;
     border-radius: 3px;
+    min-width: 70%;
 }
 
 body{
