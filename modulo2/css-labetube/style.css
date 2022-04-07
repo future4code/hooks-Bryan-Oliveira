@@ -58,16 +58,14 @@ header{
 }
 
 #pesquisa label{
-    /* flex-grow: 1; */
-    /* max-width: 50%; */
-    height: 100%;
+    height: 70%;
 }
 
 #pesquisa input{
     background-color: aliceblue;
     border-color: black;
     border-radius: 3px;
-    min-width: 70%;
+    min-width: 100%;
 }
 
 body{
@@ -82,4 +80,11 @@ footer{
     color: aliceblue;
     text-align: center;
     padding: 25px;
+}
+
+
+@media screen and (max-width: 1515px){
+    #pesquisa label{
+        height: 50%;
+    }
 }
