@@ -46,6 +46,7 @@ const PostPhoto = styled.img`
   width: 100%;
 `
 
+
 class Post extends React.Component {
   state = {
     curtido: false,
@@ -53,7 +54,9 @@ class Post extends React.Component {
     comentando: false,
     numeroComentarios: 0,
     salvo: false,
-    compartilhando: false
+    compartilhando: false,
+    escrevendoComentario: "",
+    comentarios: [""]
   }
 
   onClickCurtida = () => {
@@ -73,10 +76,16 @@ class Post extends React.Component {
 
   aoEnviarComentario = () => {
     this.setState({
-      comentando: false,
-      numeroComentarios: this.state.numeroComentarios + 1
+      // comentando: false,
+      numeroComentarios: this.state.numeroComentarios + 1,
+      comentarios: [...this.state.comentarios, this.state.escrevendoComentario],
+      escrevendoComentario: ''
     })
   }
+
+  onChangeComentario = (event) =>{
+		this.setState({escrevendoComentario: event.target.value})
+	}
 
   onClickBookmark = () => {
     this.setState({salvo: !this.state.salvo})
@@ -85,12 +94,6 @@ class Post extends React.Component {
   onClickCompartilhar = () => {
     this.setState({compartilhando: !this.state.compartilhando})
   }
-
-  aoCompartilhar = () => {
-    this.setState({compartilhando: !this.state.compartilhando})
-    console.log("Post compartilhado no")
-  }
-
 
   render() {
     let iconeCurtida
@@ -112,7 +115,7 @@ class Post extends React.Component {
     let componenteComentario
 
     if(this.state.comentando) {
-      componenteComentario = <SecaoComentario aoEnviar={this.aoEnviarComentario}/>
+      componenteComentario = <SecaoComentario onchange={this.onChangeComentario} aoEnviar={this.aoEnviarComentario} comentario={this.state.escrevendoComentario} comentarios={this.state.comentarios}/>
     }
 
     let componenteCompartilhando

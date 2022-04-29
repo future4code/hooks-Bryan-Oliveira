@@ -13,18 +13,26 @@ export class ButtonCompartilhando extends React.Component {
 
 	}
 
+aoCompartilharTwitter = () => {
+    console.log("seu post foi compartilhado no Twitter")
+}
+aoCompartilharFacebook = () => {
+    console.log("seu post foi compartilhado no Facebook")
+}
+aoCompartilharInstagram = () => {
+    console.log("seu post foi compartilhado no Instagram")
+}
+
 	render() {
 		return <>
-			    <ButtonCompartilhar onClick={this.props.aoCompartilhar}>
-                    {this.props.redeSocial}
+			    <ButtonCompartilhar onClick={this.aoCompartilharTwitter}>
+                    Twitter
                 </ButtonCompartilhar>
-
-                <ButtonCompartilhar onClick={this.props.aoCompartilhar}>
-                    {this.props.redeSocial2}
+			    <ButtonCompartilhar onClick={this.aoCompartilharFacebook}>
+                    Facebook
                 </ButtonCompartilhar>
-
-                <ButtonCompartilhar onClick={this.props.aoCompartilhar}>
-                    {this.props.redeSocial3}
+			    <ButtonCompartilhar onClick={this.aoCompartilharInstagram}>
+                    Instagram
                 </ButtonCompartilhar>
         </>
 	}
