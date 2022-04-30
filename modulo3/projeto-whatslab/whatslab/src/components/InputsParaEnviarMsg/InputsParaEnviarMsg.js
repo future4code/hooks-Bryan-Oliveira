@@ -1,62 +1,57 @@
 import React from "react";
 import styled from 'styled-components'
-    
-const Maindiv = styled.div`
-    display: flex;
-    width: 300px;
-    padding-left: 5px;
-    `
+import MostraMensagens from "../MostraMensagens/MostraMensagens";
+
     const InputRemetente = styled.input`
-    border: 1px solid black;
+    border: none;
     margin-right: 5px;
+    border-radius: 0.5em;
     width: 60px;
     padding: 3px;
+
+    color: #9AAC8C;
+    font-size: 0.7em;
+    font-weight: 300;
     `  
     const InputMsg = styled.input`
-    border: 1px solid black;
+    border-radius: 0.5em;
+    border: none;
     margin-right: 5px;
     padding: 3px;
     width: 125px;
+    margin-left: 5px;
+
+    color: #9AAC8C;
+    font-size: 0.7em;
+    font-weight: 300;
     `  
     const Button =  styled.button`
-    border: 1px solid black;
+    border: none;
+    border-radius: 0.5em;
+    margin-left: 5px;
+
+    color: lightgreen;
+    font-size: 0.7em;
+    font-weight: 600;
+    `
+    const DivInputs = styled.div`
+    display:flex;
     `
     
 class InputsParaEnviarMsg extends React.Component{
     
     state={
-        remetente:'',
-        mensagem:'',
-        mensagens: []
     }
     
-    onChangeInputRemetente = (event) => {
-        this.setState({remetente: event.target.value})
-    }
-
-    onChangeInputMsg = (event) => {
-        this.setState({mensagem: event.target.value})
-    }
-
-    onClickButton = () => {
-        this.setState({mensagens: [...this.state.mensagens, {remetente:this.state.remetente, mensagem: this.state.mensagem}]} )
-    }
+    
 
     render(){
 
-        const mensagens = this.state.mensagens.map((mensagem) => {
-            return <div>
-                <div>{mensagem.remetente}:</div>
-                <div>{mensagem.mensagem}</div>
-            </div>
-        }) 
-
-        return <Maindiv>
-        <div>{mensagens}</div>
-        <InputRemetente value={this.state.remetente} placeholder="remetente" onChange={this.onChangeInputRemetente}/>
-        <InputMsg value={this.state.mensagem} placeholder="mensagem" onChange={this.onChangeInputMsg}/>
-        <Button onClick={this.onClickButton}>Enviar</Button>
-        </Maindiv>
+        return <DivInputs>
+        <InputRemetente value={this.props.remetente} placeholder="remetente" onChange={this.props.onchangeInputRemetente}/>
+        <InputMsg onKeyDown={this.props.onkeydown} value={this.props.mensagem} placeholder="mensagem" onChange={this.props.onchangeInputMsg}/>
+        <Button onClick={this.props.onclick}>Enviar</Button>
+        </DivInputs>
         }   
 
     }
