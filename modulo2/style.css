@@ -1,10 +1,11 @@
-.icone-e-texto{
-    display: flex;
-    justify-content: space-around;
+*{
+    padding: 0;
+    margin: 0;
 }
 
-.botao-nav{
-    background-color: lightpink;
-    display: flex;
-    justify-content: space-between;
+@media screen and (max-width: 480px){
+    p{
+        background-color: blue;
+    }
 }
+

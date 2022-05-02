@@ -1,34 +1,35 @@
 import React from "react";
 import styled from 'styled-components'
 import MostraMensagens from "../MostraMensagens/MostraMensagens";
+import enviar from '../../img/send.svg'
 
     const InputRemetente = styled.input`
     border: none;
     margin-right: 5px;
-    border-radius: 0.5em;
-    width: 60px;
-    padding: 3px;
+    border-radius: 1em;
+    width: 6em;
+    padding: 5px;
 
-    color: #9AAC8C;
+    color: #676767;
     font-size: 0.7em;
-    font-weight: 300;
     `  
     const InputMsg = styled.input`
-    border-radius: 0.5em;
+    border-radius: 1em;
     border: none;
     margin-right: 5px;
-    padding: 3px;
-    width: 125px;
+    padding: 5px;
+    width: 15em;
     margin-left: 5px;
 
-    color: #9AAC8C;
+    color: #676767;
     font-size: 0.7em;
-    font-weight: 300;
     `  
     const Button =  styled.button`
     border: none;
     border-radius: 0.5em;
     margin-left: 5px;
+    background: transparent;
+    cursor: pointer;
 
     color: lightgreen;
     font-size: 0.7em;
@@ -36,6 +37,11 @@ import MostraMensagens from "../MostraMensagens/MostraMensagens";
     `
     const DivInputs = styled.div`
     display:flex;
+    margin-bottom: 0.5em;
+    `
+
+    const Img = styled.img`
+    max-height: 2em;
     `
     
 class InputsParaEnviarMsg extends React.Component{
@@ -48,9 +54,9 @@ class InputsParaEnviarMsg extends React.Component{
     render(){
 
         return <DivInputs>
-        <InputRemetente value={this.props.remetente} placeholder="remetente" onChange={this.props.onchangeInputRemetente}/>
+        <InputRemetente value={this.props.remetente} placeholder="nome" onChange={this.props.onchangeInputRemetente} autoFocus/>
         <InputMsg onKeyDown={this.props.onkeydown} value={this.props.mensagem} placeholder="mensagem" onChange={this.props.onchangeInputMsg}/>
-        <Button onClick={this.props.onclick}>Enviar</Button>
+        <Button onClick={this.props.onclick}><Img src={enviar} alt="enviar"/></Button>
         </DivInputs>
         }   
 
