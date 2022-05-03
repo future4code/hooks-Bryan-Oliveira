@@ -12,23 +12,33 @@ const InputComentario = styled.input`
     margin-right: 5px;
 `
 
+const Comentarios = styled.div`
+	color: black;
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+`
+
 export class SecaoComentario extends React.Component {
 	state = {
-
 	}
 
-	onChangeComentario() {
-
-	}
+	
 
 	render() {
-		return <CommentContainer>
+		return <>
+			<Comentarios>{this.props.comentarios.map((coment)=>{
+				return <Comentarios>{coment}</Comentarios>
+			})
+		}</Comentarios>
+				<CommentContainer>
 			<InputComentario
 				placeholder={'Comentário'}
-				value={''}
-				onChange={this.onChangeComentario}
-			/>
+				value={this.props.comentario}
+				onChange={this.props.onchange}
+				/>
 			<button onClick={this.props.aoEnviar}>Enviar</button>
 		</CommentContainer>
+		</>
 	}
 }
