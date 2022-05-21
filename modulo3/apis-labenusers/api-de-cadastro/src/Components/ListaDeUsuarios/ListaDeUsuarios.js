@@ -88,6 +88,8 @@ class ListaDeUsuarios extends React.Component{
         usuarioSendoEditado: '',
         novoEmailUsuario: '',
         novoNomeUsuario: '',
+        buscarUsuario: '',
+        usuariosEncontrados: '',
     }
 
     getAllUsersURL = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users"
@@ -133,6 +135,20 @@ class ListaDeUsuarios extends React.Component{
 
     }
 
+    onClickBuscarUsuario = ()=>{
+        axios.get(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/search?name=${this.state.buscarUsuario}`, 
+        this.headers)
+        .then((response)=>{
+            let ids = ''
+            for(let usuario of response.data){
+                ids = ids + " " + usuario.id
+            }
+            this.setState({usuariosEncontrados: ids})
+        }).catch((error)=>{
+            alert(error.message)
+        })
+    }
+
     onClickUsuarioVoltar = ()=>{
         this.setState({infosUsuarios: !this.state.infosUsuarios})
     }
@@ -149,8 +165,8 @@ class ListaDeUsuarios extends React.Component{
         this.setState({novoEmailUsuario: event.target.value})
     }
 
-    componentDidUpdate(){
-        console.log(this.state.dataUsuario)
+    onChangeBuscarUsuario = (event)=>{
+        this.setState({buscarUsuario: event.target.value})
     }
 
     editarUsuario = (user) =>{
@@ -165,11 +181,16 @@ class ListaDeUsuarios extends React.Component{
         })
     }
 
+
+
     render(){
 
-        const usuariosMap = this.state.usuarios.map((usuario)=>{
+        const usuariosMap = this.state.usuarios.filter((usuario)=>{
+
+            return this.state.usuariosEncontrados? this.state.usuariosEncontrados.includes(usuario.id): true
+        }).map((usuario)=>{
             return <DivUsuario key={usuario.id}>
-                {!this.state.usuarioSendoEditado !== usuario.id && <EditarUsuario onClick={()=>this.onClickEditarUsuario(usuario.id)}>Editar</EditarUsuario>}
+                {this.state.usuarioSendoEditado !== usuario.id && <EditarUsuario onClick={()=>this.onClickEditarUsuario(usuario.id)}>Editar</EditarUsuario>}
             <Div onClick={()=>this.onClickUsuario(usuario)}>
             USUARIO: {this.state.usuarioSendoEditado !== usuario.id && <Span>{usuario.name}</Span>}
           
@@ -182,13 +203,19 @@ class ListaDeUsuarios extends React.Component{
             {this.state.usuarioSendoEditado === usuario.id && 
             <Input value={this.state.novoEmailUsuario} onChange={this.onChangeNovoEmailUsuario} placeholder="novo email" type="email"/>}
 
-            {this.state.usuarioSendoEditado === usuario.id && <Button onClick={()=>this.editarUsuario(usuario)}>Salvar</Button>}
             </Div>
-            <Button onClick={()=>this.onClickDeletarUsuario(usuario)}> deletar usuaio</Button>
+            {this.state.usuarioSendoEditado !== usuario.id && <Button onClick={()=>this.onClickDeletarUsuario(usuario)}> deletar usuaio</Button>}
+            {this.state.usuarioSendoEditado === usuario.id && <Button onClick={()=>this.editarUsuario(usuario)}>Salvar</Button>}
             </DivUsuario>
         })
 
         return<MainDiv>
+            <Div>
+        <Input value={this.state.buscarUsuario} 
+        placeholder="Buscar usuário" 
+        onChange={this.onChangeBuscarUsuario}/> 
+        <Button onClick={this.onClickBuscarUsuario}>buscar</Button>
+            </Div>
         <Button onClick={this.props.onclick}> Voltar </Button>
         <H2>LISTA DE USUÁRIOS</H2>
         {this.state.usuarios.length===0 && <p>Carregando...</p>}
