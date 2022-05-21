@@ -1,7 +1,30 @@
 import React from "react"
 import axios from "axios"
+import styled from "styled-components"
 
+const Button = styled.button`
+background-color: transparent;
+border-radius: 3px;
 
+-webkit-transition: background-color 500ms ease-out;
+-ms-transition: background-color 500ms ease-out;
+transition: background-color 500ms ease-out;
+
+&:hover{
+    background-color: rgb(205,205,205,0.5);
+    
+    -webkit-transition: background-color 500ms ease-out;
+    -ms-transition: background-color 500ms ease-out;
+    transition: background-color 500ms ease-out;
+}
+
+`
+
+const Input = styled.input`
+margin: 10px 0 10px 5px;
+border-radius: 3px;
+padding: 3px;
+`
 
 class Cadastro extends React.Component{
     state = {
@@ -33,7 +56,7 @@ class Cadastro extends React.Component{
             "email": this.state.emailUsuario
         }, this.headers).then((response)=>{
             alert("usuario cadastrado com sucesso!")
-            window.location.reload();
+            this.props.onclick()
         }).catch((error)=>{
             alert(error.message)
         })
@@ -44,18 +67,20 @@ class Cadastro extends React.Component{
 
         return <>
 
+        <Button onClick={this.props.onclick}>  Ver lista de usuários </Button>
+
 
         <div>
-        <label>nome</label>
-        <input placeholder="nome" value={this.state.nomeUsuario} 
+        <label>NOME:</label>
+        <Input placeholder="nome" value={this.state.nomeUsuario} 
         onChange={this.onChangeNomeUsuario}/>
         </div>
         <div>
-        <label>email</label>
-        <input placeholder="email" value={this.state.emailUsuario} 
+        <label>EMAIL:</label>
+        <Input placeholder="email" value={this.state.emailUsuario} 
         onChange={this.onChangeemailUsuario} type="email"/>
         </div>
-        <button onClick={this.onClickEnviar}>enviar</button>
+        <Button onClick={this.onClickEnviar}>enviar</Button>
         </>
     }
 }
