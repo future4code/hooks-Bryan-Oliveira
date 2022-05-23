@@ -8,16 +8,65 @@ display: flex;
 flex-direction: column;
 align-items: center;
 width: 100%;
+min-height: 100vh;
+background-color: #EFF4F7;
+color: #073944;
 `
 
 const Div = styled.div`
 display: flex;
 align-self: stretch;
+justify-content: space-between;
+margin-top: 40px;
 `
 
 const PlaylistsDiv= styled.div`
 display: flex;
 flex-direction: column;
+align-items: center;
+background-color: #39A2DB;
+overflow-y: scroll;
+max-height: 400px;
+
+margin-left: 15px;
+padding: 0 15px 0 15px;
+border-radius: 3px;
+box-shadow: 0 0 0.1em 0.1em #073944;
+`
+
+const PlaylistsDivMap = styled.div`
+align-self: stretch;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+background-color: #ffffff;
+box-shadow: 0 0 0.1em 0.1em #073944;
+margin-bottom: 30px;
+padding: 15px;
+border-radius: 3px;
+div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+`
+
+const ButtonDetalhes = styled.button`
+border: 1px solid #39A2DB;
+margin-top: 5px;
+color: #073944;
+align-self: center;
+
+    -webkit-transition: background-color 500ms ease-out;
+    -ms-transition: background-color 500ms ease-out;
+    transition: background-color 500ms ease-out;
+
+&:hover{
+    background-color: #39A2DB;
+    -webkit-transition: background-color 500ms ease-out;
+    -ms-transition: background-color 500ms ease-out;
+    transition: background-color 500ms ease-out;
+}
 `
 
 const Input = styled.input`
@@ -28,6 +77,20 @@ border-radius: 3px;
 const Button = styled.button`
 background-color: transparent;
 border-radius: 3px;
+color: #073944;
+margin-left: 20px;
+
+
+-webkit-transition: background-color 500ms ease-out;
+    -ms-transition: background-color 500ms ease-out;
+    transition: background-color 500ms ease-out;
+
+&:hover{
+    background-color: #EFF4F7;
+    -webkit-transition: background-color 500ms ease-out;
+    -ms-transition: background-color 500ms ease-out;
+    transition: background-color 500ms ease-out;
+}
 `
 
 class Playlists extends React.Component{
@@ -106,15 +169,26 @@ class Playlists extends React.Component{
         })
     }
 
-    addTrackToPlaylist = (playlistId)=>{
-        axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${playlistId}/tracks`,{
-            name: "teste",
-            artist: "teste",
-            url: "google.com"
+    addTrackToPlaylist = (playlist, trackInfo)=>{
+        axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${playlist.id}/tracks`,{
+            name: trackInfo.name,
+            artist: trackInfo.artist,
+            url: trackInfo.url
         }, this.headers).then((response)=>{
-            alert("teste deu certo").catch((error)=>{
-                alert("teste deu errado")
-            })
+            alert(`${trackInfo.name} foi adicionanda a playlist`)
+            this.detalhesPlaylist(playlist)
+        }).catch((error)=>{
+            alert(error.message)
+        })
+    }
+
+    removeTrackFromPlaylist =(playlist, trackId)=>{
+        axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${playlist.id}/tracks/${trackId}`,
+        this.headers).then((response)=>{
+            alert("musica deletada com sucesso!")
+            this.detalhesPlaylist(playlist)
+        }).catch((error)=>{
+            alert("não foi possível deletar a música")
         })
     }
 
@@ -134,13 +208,13 @@ class Playlists extends React.Component{
     render(){
 
         const playlistsMap = this.state.playlists.map((playlist)=>{
-            return <div key={playlist.id}>
+            return <PlaylistsDivMap key={playlist.id}>
                 <div>
                 <span>{playlist.name}</span>
                 <Button onClick={()=>this.deletePlaylist(playlist.id)}>Deletar Playlist</Button>
                 </div>
-                <button onClick={()=>this.detalhesPlaylist(playlist)}>detalhes</button>
-            </div>
+                <ButtonDetalhes onClick={()=>this.detalhesPlaylist(playlist)}>detalhes</ButtonDetalhes>
+            </PlaylistsDivMap>
 
 })
 
@@ -156,8 +230,10 @@ class Playlists extends React.Component{
         {playlistsMap}
         </PlaylistsDiv>
         {console.log(this.state.playlistInfos)}
-        <PlaylistInfos playlistInfos={this.state.playlistInfos}/>
-        {/* {this.state.playlistTracks && playlistTracksMap} */}
+        <PlaylistInfos 
+        playlistInfos={this.state.playlistInfos} 
+        addTrackToPlaylist={this.addTrackToPlaylist}
+        removeTrackFromPlaylist={this.removeTrackFromPlaylist}/>
             </Div>
         </MainDiv>
     }
