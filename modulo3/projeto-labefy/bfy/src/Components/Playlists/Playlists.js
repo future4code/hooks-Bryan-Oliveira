@@ -50,25 +50,10 @@ div{
     justify-content: space-between;
 }
 `
-
-const ButtonDetalhes = styled.button`
-border: 1px solid #39A2DB;
-margin-top: 5px;
-color: #073944;
-align-self: center;
-
-    -webkit-transition: background-color 500ms ease-out;
-    -ms-transition: background-color 500ms ease-out;
-    transition: background-color 500ms ease-out;
-
-&:hover{
-    background-color: #39A2DB;
-    -webkit-transition: background-color 500ms ease-out;
-    -ms-transition: background-color 500ms ease-out;
-    transition: background-color 500ms ease-out;
-}
+const Span = styled.span`
+font-weight: 800;
+cursor: pointer;
 `
-
 const Input = styled.input`
 background-color: transparent;
 border-radius: 3px;
@@ -79,6 +64,8 @@ background-color: transparent;
 border-radius: 3px;
 color: #073944;
 margin-left: 20px;
+padding: 3px;
+cursor: pointer;
 
 
 -webkit-transition: background-color 500ms ease-out;
@@ -210,10 +197,10 @@ class Playlists extends React.Component{
         const playlistsMap = this.state.playlists.map((playlist)=>{
             return <PlaylistsDivMap key={playlist.id}>
                 <div>
-                <span>{playlist.name}</span>
+                <Span onClick={()=>this.detalhesPlaylist(playlist)}>{playlist.name}</Span>
                 <Button onClick={()=>this.deletePlaylist(playlist.id)}>Deletar Playlist</Button>
                 </div>
-                <ButtonDetalhes onClick={()=>this.detalhesPlaylist(playlist)}>detalhes</ButtonDetalhes>
+                {/* <ButtonDetalhes onClick={()=>this.detalhesPlaylist(playlist)}>detalhes</ButtonDetalhes> */}
             </PlaylistsDivMap>
 
 })
