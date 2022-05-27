@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components"
 import ReactAudioPlayer from 'react-audio-player';
+import RequisicaoSpotfyapi from "../../RequisicaoSpotfyapi/RequisicaoSpotfyapi";
 
 const MainDiv = styled.div`
 display: flex;
@@ -79,14 +80,28 @@ align-self: flex-start;
     transition: background-color 500ms ease-out;
 }
 `
-const DivPlayer = styled.div`
-width: 40%;
-`
-
 const Input = styled.input`
 border-radius: 3px;
 width: 95%;
 align-self: center;
+padding: 3px;
+`
+const DivBuscarMusica = styled.div`
+display: flex;
+margin-bottom: 30px;
+align-self: center;
+`
+
+const InputBuscarMusica = styled.input`
+border-radius: 3px;
+padding: 3px;
+align-self: flex-start;
+`
+const ButtonBuscarMusica = styled.button`
+border-radius: 3px;
+color: #073944;
+padding: 3px;
+margin-left: 15px;
 `
 
 const Label = styled.label`
@@ -121,6 +136,7 @@ class PlaylistInfos extends React.Component{
         newTrackName: '',
         newTrackArtist:'',
         newTrackURL: '',
+        buscarMusica: '',
     }
 
 
@@ -134,6 +150,10 @@ class PlaylistInfos extends React.Component{
 
     onChangeNewTrackURL = (event)=>{
         this.setState({newTrackURL: event.target.value})
+    }
+
+    onChangeBuscarMusica = (event)=>{
+        this.setState({buscarMusica: event.target.value})
     }
 
     onKeyDown = (event)=>{
@@ -161,6 +181,7 @@ class PlaylistInfos extends React.Component{
        window.confirm("tem certeza que deseja deletar essa música da playlist?") && this.props.removeTrackFromPlaylist(playlist,trackId)
     }
 
+    
     render(){
         const playlist = <>
         <div>
@@ -183,8 +204,16 @@ class PlaylistInfos extends React.Component{
         <Div>
             {this.props.playlistInfos.name  && playlist}
             <H3>Musicas</H3>
+            <DivBuscarMusica>
+                <RequisicaoSpotfyapi/>
+            <InputBuscarMusica value={this.state.buscarMusica} placeholder="Buscar Musicas" onChange={this.onChangeBuscarMusica}/>
+            </DivBuscarMusica>
+            {console.log(this.state.tracks)}
         {this.props.playlistInfos.tracks && this.props.playlistInfos.tracks.length>0 && 
-        this.props.playlistInfos.tracks.map((track)=>{
+        this.props.playlistInfos.tracks.filter((track)=>{
+            return track.name.toLowerCase().includes(this.state.buscarMusica.toLowerCase()) || track.artist.toLowerCase().includes(this.state.buscarMusica.toLowerCase())
+        })
+        .map((track)=>{
             return <DivMusicasMap key={track.id}>
                 <div>    
                 <Span>{track.name} - {track.artist}</Span>

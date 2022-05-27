@@ -11,6 +11,7 @@ width: 100%;
 min-height: 100vh;
 background-color: #EFF4F7;
 color: #073944;
+margin-top: 15px;
 `
 
 const Div = styled.div`
@@ -18,6 +19,7 @@ display: flex;
 align-self: stretch;
 justify-content: space-between;
 margin-top: 40px;
+margin-bottom: 15px;
 `
 
 const PlaylistsDiv= styled.div`
@@ -54,9 +56,25 @@ const Span = styled.span`
 font-weight: 800;
 cursor: pointer;
 `
+const InputBuscarPlaylist = styled.input`
+border-radius: 3px;
+padding: 3px;
+border: 1px solid black;
+`
+
 const Input = styled.input`
 background-color: transparent;
 border-radius: 3px;
+padding: 3px;
+`
+
+const ButtonBuscarPlaylist = styled.button`
+border-radius: 3px;
+color: #073944;
+margin-left: 20px;
+padding: 3px;
+cursor: pointer;
+
 `
 
 const Button = styled.button`
@@ -84,8 +102,8 @@ class Playlists extends React.Component{
     state = {
         namePlaylist: '',
         playlists: [],
-        playlistsEncontradas: [],
         playlistInfos: {},
+        buscarPlaylist: '',
 
     }
 
@@ -140,8 +158,8 @@ class Playlists extends React.Component{
         const searchPlaylistURL = "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/search?name="
         axios.get(`${searchPlaylistURL}${playlistName}`, this.headers)
         .then((response)=>{
-            alert("buscou playlist")
-            this.setState ({playlistsEncontradas: response.data.result.list})
+            console.log(response.data.result.playlist)
+            this.setState ({playlists: response.data.result.playlist})
         }).catch((error)=>{
             alert("erro na busca de playlist")
         })
@@ -192,18 +210,26 @@ class Playlists extends React.Component{
     componentDidMount(){
         this.getAllPlaylists()
     }
+
+    onChangeInputBuscarPlaylist = (event)=>{
+        this.setState({buscarPlaylist: event.target.value })
+    }
+
+    buscarPlaylist = (playlistName)=>{
+        this.state.buscarPlaylist? this.searchPlaylist(playlistName) : this.getAllPlaylists()
+    }
+
     render(){
 
-        const playlistsMap = this.state.playlists.map((playlist)=>{
+        const playlistsMap = this.state.playlists? this.state.playlists.map((playlist)=>{
             return <PlaylistsDivMap key={playlist.id}>
                 <div>
                 <Span onClick={()=>this.detalhesPlaylist(playlist)}>{playlist.name}</Span>
                 <Button onClick={()=>this.deletePlaylist(playlist.id)}>Deletar Playlist</Button>
                 </div>
-                {/* <ButtonDetalhes onClick={()=>this.detalhesPlaylist(playlist)}>detalhes</ButtonDetalhes> */}
-            </PlaylistsDivMap>
+            </PlaylistsDivMap> 
 
-})
+}) : "nenhuma playlist encontrada :/"
 
         return<MainDiv>
             <div>
@@ -214,9 +240,13 @@ class Playlists extends React.Component{
             <Div>
         <PlaylistsDiv>
         <h2>Playlists</h2>
+        <Div>
+
+        <InputBuscarPlaylist value={this.state.buscarPlaylist} placeholder="buscar playlist" onChange={this.onChangeInputBuscarPlaylist}/>
+        <ButtonBuscarPlaylist onClick={()=>this.buscarPlaylist(this.state.buscarPlaylist)}>Buscar Playlist</ButtonBuscarPlaylist>
+        </Div>
         {playlistsMap}
         </PlaylistsDiv>
-        {console.log(this.state.playlistInfos)}
         <PlaylistInfos 
         playlistInfos={this.state.playlistInfos} 
         addTrackToPlaylist={this.addTrackToPlaylist}
