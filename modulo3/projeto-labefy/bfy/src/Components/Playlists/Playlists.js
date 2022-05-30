@@ -10,92 +10,189 @@ align-items: center;
 width: 100%;
 min-height: 100vh;
 background-color: #EFF4F7;
-color: #073944;
-margin-top: 15px;
+padding-top: 15px;
+
 `
 
 const Div = styled.div`
 display: flex;
 align-self: stretch;
 justify-content: space-between;
-margin-top: 40px;
 margin-bottom: 15px;
+align-items: center;
+
+@media screen and (max-width:750px) {
+    flex-direction: column;
+}
 `
 
 const PlaylistsDiv= styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-background-color: #39A2DB;
+background-color: #0564c8;
 overflow-y: scroll;
 max-height: 400px;
-
 margin-left: 15px;
 padding: 0 15px 0 15px;
 border-radius: 3px;
 box-shadow: 0 0 0.1em 0.1em #073944;
+animation: FadeIn 1s linear;
+
+@keyframes FadeIn{
+    from{ opacity: 0;
+    }
+    to{ opacity: 1; 
+    }
+}
+
+&::-webkit-scrollbar-thumb{
+    background-color: #fff;
+} 
+scrollbar-color: #fff transparent;
+
+@media screen and (max-width:750px) {
+ margin-bottom:30px;
+ width: 95%;
+ margin-left: 0;
+ padding: 0;
+}
+
+@media screen and (max-width:450px) {
+
+}
+
 `
 
 const PlaylistsDivMap = styled.div`
 align-self: stretch;
 display: flex;
 flex-direction: column;
-align-items: flex-start;
-background-color: #ffffff;
+align-items: center;
+color: #fff;
 box-shadow: 0 0 0.1em 0.1em #073944;
 margin-bottom: 30px;
 padding: 15px;
 border-radius: 3px;
+text-align: center;
 div{
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
+
+animation: FadeIn 1s linear;
+
+@keyframes FadeIn{
+    from{ opacity: 0;
+    }
+    to{ opacity: 1; 
+    }
+}
+
+@media screen and (max-width:750px) {
+    margin: 0 10px 30px 10px;
+}
+
 `
 const Span = styled.span`
 font-weight: 800;
 cursor: pointer;
 `
 const InputBuscarPlaylist = styled.input`
-border-radius: 3px;
-padding: 3px;
-border: 1px solid black;
+border-radius: 10px;
+padding: 3px 10px;
 `
 
 const Input = styled.input`
-background-color: transparent;
-border-radius: 3px;
-padding: 3px;
+border-radius: 10px;
+padding: 3px 10px;
 `
 
 const ButtonBuscarPlaylist = styled.button`
-border-radius: 3px;
-color: #073944;
+color: #fff;
 margin-left: 20px;
-padding: 3px;
+border-radius: 10px;
+padding: 3px 10px;
+background-color: black;
 cursor: pointer;
+font-weight: 600;
 
+
+-webkit-transition: background-color 300ms ease-out;
+-ms-transition: background-color 300ms ease-out;
+transition: background-color 300ms ease-out;
+
+&:hover{
+    background-color: transparent;
+    -webkit-transition: background-color 300ms ease-out;
+    -ms-transition: background-color 300ms ease-out;
+    transition: background-color 300ms ease-out;
+}
+
+@media screen and (max-width:750px) {
+    margin-bottom: 30px;
+    margin-top: 15px;
+    margin-left: 0;
+}
 `
 
 const Button = styled.button`
 background-color: transparent;
-border-radius: 3px;
-color: #073944;
+border-radius: 10px;
+padding: 3px 10px;
+color: #fff;
 margin-left: 20px;
-padding: 3px;
 cursor: pointer;
+font-weight: 600;
+margin-right: 10px;
 
 
--webkit-transition: background-color 500ms ease-out;
-    -ms-transition: background-color 500ms ease-out;
-    transition: background-color 500ms ease-out;
+-webkit-transition: background-color 300ms ease-out;
+-ms-transition: background-color 300ms ease-out;
+transition: background-color 300ms ease-out;
 
 &:hover{
-    background-color: #EFF4F7;
-    -webkit-transition: background-color 500ms ease-out;
-    -ms-transition: background-color 500ms ease-out;
-    transition: background-color 500ms ease-out;
+    background-color: black;
+    -webkit-transition: background-color 300ms ease-out;
+    -ms-transition: background-color 300ms ease-out;
+    transition: background-color 300ms ease-out;
 }
+`
+const ButtonCirarPlaylist = styled.button`
+background-color: transparent;
+border-radius: 10px;
+padding: 3px 10px;
+color: #fff;
+cursor: pointer;
+font-weight: 600;
+margin: 30px 10px;
+align-self: flex-end;
+
+
+
+-webkit-transition: background-color 300ms ease-out;
+-ms-transition: background-color 300ms ease-out;
+transition: background-color 300ms ease-out;
+
+&:hover{
+    background-color: black;
+    -webkit-transition: background-color 300ms ease-out;
+    -ms-transition: background-color 300ms ease-out;
+    transition: background-color 300ms ease-out;
+}
+`
+
+const H2 = styled.h2`
+color: #fff;
+`
+
+const CriandoPlaylistDiv = styled.div`
+display: flex;
+align-items: center;
+flex-direction: column;
+height: 100%;
+justify-content: space-evenly;
 `
 
 class Playlists extends React.Component{
@@ -104,12 +201,13 @@ class Playlists extends React.Component{
         playlists: [],
         playlistInfos: {},
         buscarPlaylist: '',
+        criandoPlaylist: false,
 
     }
 
     headers = {
         headers:{
-            Authorization: "bryan-fernandes-hooks"
+            Authorization: `${this.props.usuario.nome}-${this.props.usuario.sobreNome}-hooks`
         }
     }
 
@@ -124,10 +222,11 @@ class Playlists extends React.Component{
         }, this.headers)
         .then((response)=>{
             alert("Playlist criada com sucesso!")
-            this.setState({namePlaylist: ''})
+            this.setState({namePlaylist: '', criandoPlaylist: false})
             this.getAllPlaylists()
         }).catch((error)=>{
             alert("não foi possível criar a playlist")
+            this.setState({criandoPlaylist: false})
         })
     }
 
@@ -142,16 +241,19 @@ class Playlists extends React.Component{
         })
     }
 
-    deletePlaylist = (playlistId)=>{
+    deletePlaylist = (playlistId, playlistName)=>{
         const deletePlaylistURL = "https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/"
 
-        axios.delete((`${deletePlaylistURL}${playlistId}`), this.headers)
-        .then((response)=>{
-            alert("playlist deletada com sucesso!")
-            this.getAllPlaylists()
-        }).catch((error)=>{
-            alert("não foi possível deletar a playlist")
-        })
+        if(window.confirm(`realmente deseja deletar a playlist '${playlistName}'?`)){
+
+            axios.delete((`${deletePlaylistURL}${playlistId}`), this.headers)
+            .then((response)=>{
+                alert("playlist deletada com sucesso!")
+                this.getAllPlaylists()
+            }).catch((error)=>{
+                alert("não foi possível deletar a playlist")
+            })
+        }
     }
 
     searchPlaylist = (playlistName)=>{
@@ -219,33 +321,46 @@ class Playlists extends React.Component{
         this.state.buscarPlaylist? this.searchPlaylist(playlistName) : this.getAllPlaylists()
     }
 
+    onClickcriandoPlaylist = ()=>{
+        this.setState({criandoPlaylist: true})
+    }
+
     render(){
 
         const playlistsMap = this.state.playlists? this.state.playlists.map((playlist)=>{
             return <PlaylistsDivMap key={playlist.id}>
                 <div>
                 <Span onClick={()=>this.detalhesPlaylist(playlist)}>{playlist.name}</Span>
-                <Button onClick={()=>this.deletePlaylist(playlist.id)}>Deletar Playlist</Button>
+                <Button onClick={()=>this.deletePlaylist(playlist.id, playlist.name)}>Deletar Playlist</Button>
                 </div>
             </PlaylistsDivMap> 
 
 }) : "nenhuma playlist encontrada :/"
 
-        return<MainDiv>
-            <div>
+        const criandoPlaylist = <CriandoPlaylistDiv>
+            <H2>Nova Playlist</H2>
+            <Input value={this.state.namePlaylist} placeholder="nome da playlist" onChange={this.onChangeNamePlaylist}/>
+        <ButtonCirarPlaylist onClick={this.createPlaylist}>Criar Playlist</ButtonCirarPlaylist>
+        </CriandoPlaylistDiv>
 
-        <Input value={this.state.namePlaylist} onChange={this.onChangeNamePlaylist}/>
-        <Button onClick={this.createPlaylist}>Criar Playlist</Button>
-            </div>
-            <Div>
-        <PlaylistsDiv>
-        <h2>Playlists</h2>
+        const playlistsDivContent = <>
+        <H2>Playlists</H2>
+        <ButtonCirarPlaylist onClick={this.onClickcriandoPlaylist}>Nova Playlist</ButtonCirarPlaylist>
+       
         <Div>
-
         <InputBuscarPlaylist value={this.state.buscarPlaylist} placeholder="buscar playlist" onChange={this.onChangeInputBuscarPlaylist}/>
         <ButtonBuscarPlaylist onClick={()=>this.buscarPlaylist(this.state.buscarPlaylist)}>Buscar Playlist</ButtonBuscarPlaylist>
         </Div>
+        <p>Clicque no nome de uma playlist para exibir suas informações</p>
         {playlistsMap}
+        </>
+
+        return<MainDiv>
+
+            <Div>
+        <PlaylistsDiv>
+        {this.state.criandoPlaylist || playlistsDivContent}
+        {this.state.criandoPlaylist && criandoPlaylist}
         </PlaylistsDiv>
         <PlaylistInfos 
         playlistInfos={this.state.playlistInfos} 
