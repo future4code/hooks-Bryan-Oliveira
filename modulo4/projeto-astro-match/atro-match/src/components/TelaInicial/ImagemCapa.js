@@ -1,19 +1,8 @@
-import React, {useState , useEffect} from "react";
-import styled, { keyframes } from "styled-components";
-import { profileToChose } from "../Requisicoes/Requisicoes";
-
-// Create the keyframes
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(45deg), translateX(10px);
-  }
-`;
+import React from "react";
+import styled from "styled-components";
 
 const ImagemCapaDiv = styled.div`
+
 position: absolute;
 top: -50px;
 
@@ -33,27 +22,14 @@ img{
     object-fit: cover;
 }
 
-${props => props.escolha && ({
-})
-}
 `
 
 
-// Here we create a component that will rotate everything we pass in over two seconds
-const Rotate = styled(ImagemCapaDiv)`
-  animation: ${rotate} 5s linear;
-`;
-
-
 const ImagemCapa = (props)=>{
-    console.log(props.escolha)
 
-    
-    const retorno = !props.escolha? ( <ImagemCapaDiv className="ImagemCapaDiv">
+    const retorno = ( <ImagemCapaDiv className="ImagemCapaDiv">
     <img src={props.profile.photo} />
-</ImagemCapaDiv>) : ( <Rotate className="ImagemCapaDiv">
-                <img src={props.profile.photo} />
-            </Rotate>)
+</ImagemCapaDiv>) 
 
 
     return <>

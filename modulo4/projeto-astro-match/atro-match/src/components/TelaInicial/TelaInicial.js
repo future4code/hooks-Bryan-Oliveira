@@ -1,57 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { MainDiv } from "../../theme/style";
-import axios from "axios";
+import { Carregando } from "../../theme/style";
 
-import { getProfileToChoose, getMatches, ChoosePerson, clear, matches, profileToChose, getProfileToChooseURL  } from "../Requisicoes/Requisicoes";
+import { getProfileToChoose,  ChoosePerson,  profileToChose } from "../Requisicoes/Requisicoes";
 
-import  matches_icon  from "../../img/matches_icon.svg";
 import ImagemCapa from "./ImagemCapa";
 
 
-const PerfilDiv = styled.div`
-display: flex;
-flex-direction: column;
-/* justify-content: space-evenly; */
-align-items: center;
-position: relative;
 
-height: 250px;
-width: 350px;
-background-color:#fff ;
-
-border-radius: 20px;
-/* border: 1px solid black; */
-box-shadow: 0 35px 80px rgba(0,0,0,0.5);
-transition: 0.5s;
-
-&:hover{
-    height: 450px;
-
-    .ImagemCapaDiv{
-        height: 250px;
-        width: 230px;
-    }
-
-    .BotoesLikeDiv{
-        transform: translatey(0px);
-    }
-
-    .ProfileInfos{
-        transform: translateY(-20%);
-        align-items: center;
-    }
-
-
-}
-`
-const PerfilDivHeader = styled.div`
-display: flex;
-align-self: stretch;
-width: 100%;
-align-items: center;
-justify-content: flex-end;
-`
 
 
 const ProfileInfos = styled.div`
@@ -96,82 +52,103 @@ button{
     padding: 10px 30px;
     border: none;
     font-weight: 500;
-    background: #ff5f95;
     color: #fff;
     cursor: pointer;
-
-    
-
 }
 `
+
+const BotaoDislike = styled.button`
+
+    background-color: #ff5f95;
+
+`
+
+const BotaoLike = styled.button`
+    /* background: #ff5f95; */
+background-color: lightgreen;
+`
+
+const Span = styled.span`
+font-weight: 600;
+text-align: center;
+margin: auto;
+`
+
 const TelaInicial = (props) =>{
     const [escolha, setEscolha] = useState('')
+    const [profile, setProfile] = useState({...profileToChose})
+    const [temporizadorFinalizado , setTemporizadorFinalizado] = useState(false)
+
     
     
     useEffect(()=>{
-        axios.get(getProfileToChooseURL)
-        .then((response)=>{
-            setProfile(response.data.profile)
-        console.log(profileToChose)}
-        ).catch((error)=>{
-            console.log(error)
-        })
+        getProfileToChoose()
+
+        const id = setTimeout(() => {
+            setProfile(profileToChose)
+            setTemporizadorFinalizado(true)
+          }, 1000);
+          return () => clearTimeout(id);
     }, [])
+
+    useEffect(()=>{
+        setTemporizadorFinalizado(true)
+    },[profile])
     
-    const [profile, setProfile] = useState({...profileToChose})
     
 
     const onClickLike = ()=>{
         ChoosePerson(profileToChose.id , true)
+        setTemporizadorFinalizado(false)
         getProfileToChoose()
-        setInterval(()=>{
+        
+        const id = setTimeout(() => {
             setProfile(profileToChose)
-        }, 1000)
+          }, 1000);
+          return () => clearTimeout(id);
+
     }
 
     const onClickDislike = ()=>{
         ChoosePerson(profileToChose.id , false)
+        setTemporizadorFinalizado(false);
         getProfileToChoose()
-        setInterval(()=>{
+
+        const id = setTimeout(() => {
             setProfile(profileToChose)
-        }, 1000)
+            setTemporizadorFinalizado(true);
+          }, 1000);
+          return () => clearTimeout(id);
+        
     }
     
 
-    return <MainDiv>
-        <PerfilDiv>
-            <PerfilDivHeader>
 
-                <img style={{width: "50px", height: "50px"} } src={matches_icon} alt="matches-icon" />
-            </PerfilDivHeader>
+    const profileInfos = <ProfileInfos className="ProfileInfos">
+    <h2>
+        {profile.name}, {profile.age}
+    </h2>
+    <p>
+        {profile.bio}
+    </p>
 
-            <ImagemCapa escolha={escolha} profile={profile}/>
+<BotoesLikeDiv className="BotoesLikeDiv">
+    <BotaoDislike onClick={onClickDislike}>
+        dislike
+    </BotaoDislike>
 
-            <ProfileInfos className="ProfileInfos">
-                <h2>
-                    {profile.name}, {profile.age}
-                </h2>
-                <p>
-                    {profile.bio}
-                </p>
+    <BotaoLike onClick={onClickLike}>
+        like
+    </BotaoLike>
+</BotoesLikeDiv>
+</ProfileInfos>
 
-            <BotoesLikeDiv className="BotoesLikeDiv">
-                <button onClick={onClickDislike}>
-                    dislike
-                </button>
-
-                <button onClick={onClickLike}>
-                    like
-                </button>
-            </BotoesLikeDiv>
-            </ProfileInfos>
-
-        
-        </PerfilDiv>
-
-        <h1 style={{color: "blue"}}>Astro match</h1>
-    
-    </MainDiv>
+    return <>
+            {console.log("timer", temporizadorFinalizado)}
+            {temporizadorFinalizado?  profile.name? <><ImagemCapa escolha={escolha} profile={profile}/>
+            {profileInfos}
+            </> : <Span>Nenhum perfil encontrado! tente recarregar a página, caso não funcione resete os matches</Span> : <Carregando>Carregando</Carregando>}
+    </>
 }
 
 export default TelaInicial
