@@ -1,4 +1,5 @@
 # Astro Match 
+[link](https://kind-suggestion.surge.sh/)
 
 Em busca de um par para não passar o dia dos namorados só?? Esse app pode te ajudar a encontrar a pessoa ideal.
 
@@ -23,4 +24,3 @@ Em busca de um par para não passar o dia dos namorados só?? Esse app pode te a
 * Usar tematização para a estilização
 * Padronizar mais os componentes de estilização 
 * Abstrair algumas funções e componentes
-
