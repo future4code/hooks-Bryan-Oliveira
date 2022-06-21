@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 
-const Coordinator = ()=>{
+const UseCoordinator = ()=>{
     
     const navigate = useNavigate()
 
@@ -25,8 +25,8 @@ const Coordinator = ()=>{
         navigate('/login');
     }
 
-     const goToTripDetailsPage = ()=>{
-        navigate('/admin/trips/:id');
+     const goToTripDetailsPage = (tripId)=>{
+        navigate(`/admin/trips/${tripId || ':id'}`);
 }
 
     const goToApplicationform = ()=>{
@@ -51,4 +51,4 @@ const Coordinator = ()=>{
     
 }
 
-export default Coordinator
+export default UseCoordinator

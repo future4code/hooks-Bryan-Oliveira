@@ -1,30 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { UseRequestData } from '../../hooks/UseRequestData'
-import { baseUrl } from '../../constants/constants'
-import Coordinator from '../../Coordinator'
+import { useNavigate } from 'react-router-dom'
+import UseCoordinator from '../../hooks/UseCoordinator'
 
 const Home = ()=>{
 
-    const {goToListTripsPage, goToAdminHomePage, goToLoginPage, goToTripDetailsPage} = Coordinator()
-
-    const [trips, tripsError, tripsIsLoading] = UseRequestData(`${baseUrl}/trips`)
-
-    const tripsMap = trips && trips.trips.map((trip)=>{
-        return <div>{trip.name}</div>
-    })
+    const {goToListTripsPage, goToAdminHomePage, goToLoginPage, goToTripDetailsPage} = UseCoordinator()
 
 
-    const isAthenticated = true
+    const isAthenticated = false
 
     return <>
     <h1>Home</h1>
     
-    {tripsIsLoading && <span>Carregando...</span>}
-    {!tripsIsLoading && tripsError && <span>ocorreu um erro</span>}
-    {!tripsIsLoading && trips.trips.length>0 && tripsMap}
-    {!tripsIsLoading && trips.trips.length===0 && <span>nenhuma viagem encontrada</span>}
-
-    <button onClick={goToListTripsPage}>go to list trips page</button>
+    <button id='go-to-list-trips-page' onClick={goToListTripsPage}>go to list trips page</button>
     <button onClick={isAthenticated? goToAdminHomePage : goToLoginPage}>admin area</button>
     <button onClick={goToTripDetailsPage}>go to trip details</button>
     </>

@@ -1,9 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import Coordinator from "../../Coordinator";
+import UseCoordinator from "../../hooks/UseCoordinator";
+import UseProtectedPage from "../../hooks/UseProtectedPage";
 const CreateTripPage = ()=>{
+    
+    UseProtectedPage()
 
-    const {goBack} = Coordinator()
+    const {goBack} = UseCoordinator()
+
 
     return <>
     CreateTripPage

@@ -1,9 +1,9 @@
 import React from "react";
-import Coordinator from "../../Coordinator";
+import UseCoordinator from "../../hooks/UseCoordinator";
 
 const ErrorPage = ()=>{
 
-    const {goToHomePage} = Coordinator()
+    const {goToHomePage} = UseCoordinator()
     return (
         <>
         <h1>Page not found</h1>
