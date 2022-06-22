@@ -7,7 +7,6 @@ const UseProtectedPage = ()=>{
     const token = localStorage.getItem('token')
 
     const notAuth = ()=>{
-        alert('faça o login primeiro')
         navigate('/login')
     }
     useEffect(()=>{

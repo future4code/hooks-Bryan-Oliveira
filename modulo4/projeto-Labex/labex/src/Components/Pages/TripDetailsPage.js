@@ -40,6 +40,7 @@ const TripDetailsPage = ()=>{
 
     const {goToHomePage, goBack} = UseCoordinator()
 
+
     return <>
     <h1>TripDetailsPage</h1>
 

@@ -33,13 +33,24 @@ const AdminHomePage = ()=>{
         goToTripDetailsPage(tripId)
     }
 
-    const {goToTripDetailsPage, goToCreateTripPage} = UseCoordinator()
+    const {goBack, goToCreateTripPage, goToTripDetailsPage} = UseCoordinator()
+
+    const logout = ()=>{
+        localStorage.removeItem('token')
+        window.location.reload()
+    }
+
     return <>
     <h1>AdminHomePage</h1>
-    
+   
+    <div>
+        <button onClick={goBack}>go back</button>
+        <button onClick={goToCreateTripPage}>go to create trips</button>
+        <button onClick={logout}>logout</button>
+    </div>
+   
+    {tripsIsLoading && <span>carregando...</span>}
     {trips && trips.trips.length>0 && <TripsMapDiv>{tripsMap}</TripsMapDiv>}
-    <button onClick={goToTripDetailsPage}>go to trip details</button>
-    <button onClick={goToCreateTripPage}>go to create trips</button>
     </>
 }
 

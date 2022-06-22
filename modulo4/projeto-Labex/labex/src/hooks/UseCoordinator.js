@@ -9,8 +9,8 @@ const UseCoordinator = ()=>{
         navigate('/');
     }
 
-     const goToAdminHomePage = ()=>{
-        navigate('/admin/trips/list');
+     const goToAdminHomePage = (props)=>{
+        navigate('/admin/trips/list', props);
     } 
 
      const goToCreateTripPage = ()=>{

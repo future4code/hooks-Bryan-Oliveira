@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import UseCoordinator from "../../hooks/UseCoordinator";
-import UseCreateData from "../../hooks/UseCreateData";
 import {baseUrl} from '../../constants/constants'
 import axios from "axios";
 
@@ -9,7 +8,7 @@ const LoginPage = ()=>{
     const [email, setEmail]= useState('')
     const [password, setPassword]= useState('')
 
-    const {goToAdminHomePage} = UseCoordinator()
+    const {goToAdminHomePage, goToHomePage} = UseCoordinator()
 
     const onChangeEmail = (event)=>{
         setEmail(event.target.value)
@@ -29,7 +28,7 @@ const LoginPage = ()=>{
         })
         .then((res)=>{
             localStorage.setItem('token',res.data.token)
-            goToAdminHomePage()
+            goToAdminHomePage({replace: true})
         })
         .catch((err)=>{
             console.log(err)
@@ -46,7 +45,7 @@ const LoginPage = ()=>{
     <input onKeyDown={onClickLogin} value={email} onChange={onChangeEmail} autoFocus placeholder="email" type={'email'}/>
     <input onKeyDown={onClickLogin} value={password} onChange={onchangePassword} placeholder="password" type={'password'}/>
     <button onClick={onClickLogin}>Login</button>
-    <button onClick={goToAdminHomePage}>Login</button>
+    <button onClick={goToHomePage}>go home</button>
     </>
 }
 
