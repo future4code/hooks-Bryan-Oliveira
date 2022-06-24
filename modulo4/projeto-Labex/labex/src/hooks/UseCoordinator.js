@@ -29,8 +29,8 @@ const UseCoordinator = ()=>{
         navigate(`/admin/trips/${tripId || ':id'}`);
 }
 
-    const goToApplicationform = ()=>{
-        navigate('/trips/application')
+    const goToApplicationform = (tripId)=>{
+        navigate(`/trips/application/${tripId}`)
     }
 
     const goBack = ()=>{
@@ -38,14 +38,14 @@ const UseCoordinator = ()=>{
     }
 
     return {
-        goToAdminHomePage: goToAdminHomePage,
-        goToHomePage: goToHomePage,
-        goToCreateTripPage: goToCreateTripPage,
-        goToListTripsPage: goToListTripsPage,
-        goToLoginPage: goToLoginPage,
-        goToTripDetailsPage: goToTripDetailsPage, 
-        goBack: goBack,
-        goToApplicationform: goToApplicationform,
+        goToAdminHomePage,
+        goToHomePage,
+        goToCreateTripPage,
+        goToListTripsPage,
+        goToLoginPage,
+        goToTripDetailsPage, 
+        goBack,
+        goToApplicationform,
 
     }
     

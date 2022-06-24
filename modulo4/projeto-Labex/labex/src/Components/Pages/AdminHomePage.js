@@ -4,6 +4,7 @@ import UseProtectedPage from "../../hooks/UseProtectedPage";
 import {UseRequestData} from '../../hooks/UseRequestData'
 import { baseUrl } from "../../constants/constants";
 import styled from 'styled-components'
+import UseEraseData from "../../hooks/UseEraseData";
 
 const TripsMapDiv = styled.div`
 display: flex;
@@ -24,9 +25,38 @@ const AdminHomePage = ()=>{
     UseProtectedPage()
 
     const [trips , tripsError, tripsIsLoading] = UseRequestData(`${baseUrl}/trips`)
+    const [deleteSuccess, deleteError, deleteIsLoading, Delete] = UseEraseData()
 
+    const deleteTrip = (tripId)=>{
+        const header = {
+            headers: {
+                auth: localStorage.getItem('token')
+            }
+        }
+        const callBackError = ()=>{
+            alert('error')
+        }
+        
+        const reload = ()=>{
+            window.location.reload()
+        } 
+        
+
+        Delete(`${baseUrl}/trips/${tripId}`, header, reload, callBackError)
+    }
+    
     const tripsMap = trips && trips.trips.map((trip)=>{
-        return <div onClick={()=>onClickTripDetails(trip.id)}>{trip.name}</div>
+        return <div key={trip.id}>
+            
+            <div 
+            onClick={()=>onClickTripDetails(trip.id)}>
+                {trip.name}
+            </div>
+
+            <button 
+            onClick={()=>deleteTrip(trip.id)}>
+                X
+            </button></div>
     })
 
     const onClickTripDetails = (tripId)=>{
@@ -35,10 +65,12 @@ const AdminHomePage = ()=>{
 
     const {goBack, goToCreateTripPage, goToTripDetailsPage} = UseCoordinator()
 
+
     const logout = ()=>{
         localStorage.removeItem('token')
         window.location.reload()
     }
+
 
     return <>
     <h1>AdminHomePage</h1>

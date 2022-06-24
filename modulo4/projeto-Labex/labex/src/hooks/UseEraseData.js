@@ -1,26 +1,32 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const UseEraseData = (url)=>{
+const UseEraseData = ()=>{
+    const [data, setData] = useState({})
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(true)
 
-    useEffect(()=>{
-
+    const Delete = (url, header, callBackRes ,callBackError)=>{
         setIsLoading(true)
 
         axios
-        .delete()
-        .then(()=>{
+        .delete(url, header)
+        .then((res)=>{
             setIsLoading(false)
+            setData(res)
+            console.log('res', res)
+            setTimeout(()=>{
+                callBackRes()},500)
         })
         .catch((err)=>{
             setIsLoading(false)
             setError(err)
+            console.log('error', err)
+            callBackError()
         })
-    },[url])
+    }
 
-    return [error, isLoading]
+    return [data , error, isLoading, Delete]
     
 }
 

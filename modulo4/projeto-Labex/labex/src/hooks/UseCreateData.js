@@ -1,28 +1,30 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const UseCreateData = (url, body)=>{
+const UseCreateData = ()=>{
 
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(true)
     const [data , setData] = useState({})
-    useEffect(()=>{
-        
+    
+    const post = (url, body, header, callBackRes, callBackErr)=>{
         setIsLoading(true)
 
         axios
-        .post(url, body)
+        .post(url, body, header)
         .then((res)=>{
             setIsLoading(false)
             setData(res)
+            callBackRes(res)
         })
         .catch((err)=>{
             setIsLoading(false)
-            setError(error)
+            setError(err)
+            callBackErr(err)
         })
-    },[url])
+    }
 
-    return [data ,error , isLoading]
+    return [data ,error , isLoading, post]
 }
 
 export default UseCreateData

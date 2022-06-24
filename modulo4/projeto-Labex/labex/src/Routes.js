@@ -7,6 +7,7 @@ import Home from './Components/Pages/Home'
 import ListTripsPage from './Components/Pages/ListTripsPage'
 import LoginPage from './Components/Pages/LoginPage'
 import TripDetailsPage from './Components/Pages/TripDetailsPage'
+import Header from './Components/Header'
 
 const Router = ()=>{
 
@@ -17,7 +18,7 @@ const Router = ()=>{
                 <Route index element={<Home />} />
 
                 <Route path='trips/list' element={<ListTripsPage />} />
-                <Route path='trips/application' element={<ApplicationFormPage />} />
+                <Route path='trips/application/:id' element={<ApplicationFormPage />} />
                 
                 <Route path='login' element={<LoginPage />} />
                 
