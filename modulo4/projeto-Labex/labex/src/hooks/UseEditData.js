@@ -1,28 +1,30 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const UseEditData = (url)=>{
-
+const UseEditData = ()=>{
+    const [data, setData] = useState({})
     const [error, setError] = useState('')
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
 
-    useEffect(()=>{
 
+    const put = (url, body, headers, callbackRes, callbackErr) => {
         setIsLoading(true)
 
         axios
-        .put(url)
-        .then(()=>{
-        setIsLoading(false)
+        .put(url, body, headers)
+        .then((res)=>{
+            setData(res.data)
+            setIsLoading(false)
+            callbackRes(res.data)
         })
         .catch((err)=>{
-        setIsLoading(false)
-        setError(err)
-        })        
+            setError(err)
+            setIsLoading(false)
+            callbackErr(err)
+        })   
+    }
 
-    },[url])
-
-    return [error, isLoading]
+    return [data , error, isLoading, put]
 
 }
 

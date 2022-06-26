@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 const UseCreateData = ()=>{
 
     const [error, setError] = useState('')
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const [data , setData] = useState({})
     
     const post = (url, body, header, callBackRes, callBackErr)=>{

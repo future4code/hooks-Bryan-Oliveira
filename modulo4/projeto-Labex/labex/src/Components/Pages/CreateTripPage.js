@@ -4,6 +4,16 @@ import UseCoordinator from "../../hooks/UseCoordinator";
 import UseCreateData from "../../hooks/UseCreateData";
 import UseForm from "../../hooks/UseForm";
 import UseProtectedPage from "../../hooks/UseProtectedPage";
+import styled from "styled-components";
+import { InputsText, Select, Option, FluxoryButton, SubmitButton, Form, Titles, PageDiv, PostPutDeleteLoading} from '../../styles/styles'
+
+const InputText = styled(InputsText)`
+margin: 10px;
+`
+
+const MainDiv = styled(PageDiv)`
+border: none;
+`
 const CreateTripPage = ()=>{
     UseProtectedPage()
     
@@ -18,42 +28,68 @@ const CreateTripPage = ()=>{
         durationInDays: '',
         date: undefined
     })
-
+    
     const [createTripRes, createTripErr, createTripIsLoading, createTrip] = UseCreateData()
-
+    
+    
     const submit = (event)=>{
         event.preventDefault()
         
-        const header= {
-            headers: {
-                auth: localStorage.getItem('token')
+        const callbackError = ()=>{
+            alert("something gone wrong!")
+        }
+
+        const validation = ()=>{
+            const header= {
+                headers: {
+                    auth: localStorage.getItem('token')
+                }
             }
+            
+            createTrip(`${baseUrl}/trips`, form ,header, goBack, callbackError)
         }
         
-        createTrip(`${baseUrl}/trips`, form ,header, goBack)
+        
+        const currentDate = new Date()
+        const formDate = new Date(form.date)
+
+        
+        if(form.durationInDays < 50){
+        alert('A viagem deve ter pelo menos 50 dias')
+        }
+        else if(currentDate.getTime() >= formDate.getTime() ){
+        alert('A viagem deve ser no futuro')
+        }
+        else{
+        validation()
+        }
     }
     
     
-    return <>
-    <h1>CreateTripPage</h1>
-    <button onClick={goBack}>go back</button>
-    <button onClick={goToHomePage}>go home</button>
+    return <MainDiv>
+    <Titles>CreateTripPage</Titles>
     
-    <form onSubmit={submit}>
+    <div>
+        <FluxoryButton onClick={goBack}>go back</FluxoryButton>
+        <FluxoryButton onClick={goToHomePage}>go home</FluxoryButton>
+    </div>
+    
+    <Form onSubmit={submit}>
 
-        <input name="name" value={form.name} onChange={onChangeForm} placeholder='name' />
-        <select name="planet" value={form.planet} onChange={onChangeForm}>
+        <InputText pattern='^.{5,}$' title="mínimo de 5 letras" name="name" value={Form.name} onChange={onChangeForm} placeholder='name' />
+        <Select name="planet" value={form.planet} onChange={onChangeForm}>
             {planets.map((planet, i)=>{
-                return <option key={i}>{planet}</option>
+                return <Option key={i}>{planet}</Option>
             })}
-        </select>
-        <input name="date" value={form.date} onChange={onChangeForm} type={'date'} />
-        <input name="description" value={form.description} onChange={onChangeForm} placeholder='description' />
-        <input name="durationInDays" value={form.durationInDays} onChange={onChangeForm} placeholder='duration in days' type={'number'}/>
-        <button>enviar</button>
-    </form>
+        </Select>
+        <InputText name="date" value={form.date} onChange={onChangeForm} type={'date'} />
+        <InputText pattern='^.{30,}$' title='mínimo de 30 caracteres' name="description" value={form.description} onChange={onChangeForm} placeholder='description' />
+        <InputText name="durationInDays" value={form.durationInDays} onChange={onChangeForm} placeholder='duration in days' type={'number'}/>
+        <SubmitButton>enviar</SubmitButton>
+    </Form>
+
+    {createTripIsLoading && <PostPutDeleteLoading />}
     
-    </>
-}
+    </MainDiv>}
 
 export default CreateTripPage

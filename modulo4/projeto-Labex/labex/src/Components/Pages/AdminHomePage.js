@@ -1,22 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import UseCoordinator from "../../hooks/UseCoordinator";
 import UseProtectedPage from "../../hooks/UseProtectedPage";
 import {UseRequestData} from '../../hooks/UseRequestData'
 import { baseUrl } from "../../constants/constants";
 import styled from 'styled-components'
 import UseEraseData from "../../hooks/UseEraseData";
+import { FluxoryButton, Titles,  Card, SubTitle, RequestLoading, PostPutDeleteLoading } from "../../styles/styles";
 
 const TripsMapDiv = styled.div`
 display: flex;
 flex-direction: column;
 
+`
+
+const Buttons = styled(FluxoryButton)`
+margin-bottom:15px;
+`
+
+const Cards = styled(Card)`
+display: flex;
+justify-content: space-between;
 
 div{
-    margin: 5px 0;
-    border: 1px solid;
-    padding: 3px;
-    border-radius: 5px;
     cursor: pointer;
+    border-bottom: 2px solid transparent;
+    padding: 0 10px;
+
+    &:hover{
+        border-color: orange;
+    }
+}
+
+margin-bottom: 15px;
+`
+
+const DeleteButton = styled.button`
+background-color: ${({ theme }) => theme.background};
+border: none;
+cursor: pointer;
+font-size: 24px;
+font-weight: 600;
+
+color: ${({ theme }) => theme.text};
+
+&:hover{
+    color: red;
 }
 `
 
@@ -24,7 +52,11 @@ const AdminHomePage = ()=>{
 
     UseProtectedPage()
 
-    const [trips , tripsError, tripsIsLoading] = UseRequestData(`${baseUrl}/trips`)
+    const [trips, setTrips] = useState({})
+    
+    
+    console.log(trips)
+    const [tripsData , tripsError, tripsIsLoading] = UseRequestData(`${baseUrl}/trips`, {}, setTrips)
     const [deleteSuccess, deleteError, deleteIsLoading, Delete] = UseEraseData()
 
     const deleteTrip = (tripId)=>{
@@ -34,29 +66,32 @@ const AdminHomePage = ()=>{
             }
         }
         const callBackError = ()=>{
-            alert('error')
+            alert('something gone wrong!')
         }
         
         const reload = ()=>{
-            window.location.reload()
+            const newTrips = trips.trips.filter((trip)=>{
+                return trip.id !== tripId
+            })
+            setTrips({trips: newTrips})
         } 
         
 
         Delete(`${baseUrl}/trips/${tripId}`, header, reload, callBackError)
     }
     
-    const tripsMap = trips && trips.trips.map((trip)=>{
-        return <div key={trip.id}>
+    const tripsMap = !tripsIsLoading && trips.trips.map((trip)=>{
+        return <Cards key={trip.id}>
             
             <div 
             onClick={()=>onClickTripDetails(trip.id)}>
-                {trip.name}
+                <SubTitle>{trip.name}</SubTitle>
             </div>
 
-            <button 
+            <DeleteButton 
             onClick={()=>deleteTrip(trip.id)}>
                 X
-            </button></div>
+            </DeleteButton></Cards>
     })
 
     const onClickTripDetails = (tripId)=>{
@@ -73,16 +108,17 @@ const AdminHomePage = ()=>{
 
 
     return <>
-    <h1>AdminHomePage</h1>
+    <Titles>AdminHomePage</Titles>
    
     <div>
-        <button onClick={goBack}>go back</button>
-        <button onClick={goToCreateTripPage}>go to create trips</button>
-        <button onClick={logout}>logout</button>
+        <Buttons onClick={goBack}>go back</Buttons>
+        <Buttons onClick={goToCreateTripPage}>go to create trips</Buttons>
+        <Buttons onClick={logout}>logout</Buttons>
     </div>
    
-    {tripsIsLoading && <span>carregando...</span>}
-    {trips && trips.trips.length>0 && <TripsMapDiv>{tripsMap}</TripsMapDiv>}
+    {tripsIsLoading && <RequestLoading><div/><div/><div/><div/><div/><div/></RequestLoading> }
+    {!tripsIsLoading && trips.trips.length>0 && <TripsMapDiv>{tripsMap}</TripsMapDiv>}
+    {deleteIsLoading && <PostPutDeleteLoading />}
     </>
 }
 

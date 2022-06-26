@@ -2,50 +2,57 @@ import React, { useState } from "react";
 import UseCoordinator from "../../hooks/UseCoordinator";
 import {baseUrl} from '../../constants/constants'
 import axios from "axios";
+import { FluxoryButton, Form, InputsText, Titles } from '../../styles/styles'
+import styled from "styled-components";
+import UseCreateData from "../../hooks/UseCreateData";
+import UseForm from '../../hooks/UseForm'
+
+const GoBack = styled(FluxoryButton)`
+margin: 10px 0;
+`  
+
+const InputText = styled(InputsText)`
+margin-bottom: 15px;
+`
 
 const LoginPage = ()=>{
 
-    const [email, setEmail]= useState('')
-    const [password, setPassword]= useState('')
+    const {form, onChangeForm, clarFields} = UseForm({
+        email: '',
+        password: '',
 
-    const {goToAdminHomePage, goToHomePage} = UseCoordinator()
+    })
 
-    const onChangeEmail = (event)=>{
-        setEmail(event.target.value)
-    }
+    const [data, dataError, dataIsLoading, dataPost] = UseCreateData()
 
-    const onchangePassword = (event)=>{
-        setPassword(event.target.value)
-    }
+    const { goToAdminHomePage,goBack} = UseCoordinator()
 
     const onClickLogin = (event)=>{
-        if(event.key==='Enter'){localStorage.removeItem('token')
+        event.preventDefault()
+        localStorage.removeItem('token')
         
-        axios
-        .post(`${baseUrl}/login`,{
-            email, 
-            password
-        })
-        .then((res)=>{
+        const callbackRes = (res) =>{
             localStorage.setItem('token',res.data.token)
             goToAdminHomePage({replace: true})
-        })
-        .catch((err)=>{
-            console.log(err)
-            alert('usuário ou senha incorretos')
-        })
-
         }
+        const callbackErr = () =>{
+            alert('email ou senha incorretos')
+        }
+
+        dataPost(`${baseUrl}/login`,form, {},callbackRes, callbackErr )
     }
 
 
     return <>
-    <h1>LoginPage</h1>
+    <Titles>LoginPage</Titles>
+        <GoBack onClick={goBack}>go home</GoBack>
 
-    <input onKeyDown={onClickLogin} value={email} onChange={onChangeEmail} autoFocus placeholder="email" type={'email'}/>
-    <input onKeyDown={onClickLogin} value={password} onChange={onchangePassword} placeholder="password" type={'password'}/>
-    <button onClick={onClickLogin}>Login</button>
-    <button onClick={goToHomePage}>go home</button>
+    <Form onSubmit={onClickLogin}>
+        <InputText required pattern='[a-z0-9 ._%+-]+@[a-z0-9 .-]+\.[a-z]{2,}$' title='digite email válido' name='email' value={form.email} onChange={onChangeForm} autoFocus placeholder="email" type={'email'}/>
+        <InputText required name='password' value={form.password} onChange={onChangeForm} placeholder="password" type={'password'}/>
+        <FluxoryButton>Login</FluxoryButton>
+        {console.log(form)}
+    </Form>
     </>
 }
 

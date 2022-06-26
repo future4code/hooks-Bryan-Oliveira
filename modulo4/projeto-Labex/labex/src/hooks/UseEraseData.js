@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 const UseEraseData = ()=>{
     const [data, setData] = useState({})
     const [error, setError] = useState('')
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
 
     const Delete = (url, header, callBackRes ,callBackError)=>{
         setIsLoading(true)
@@ -12,17 +12,14 @@ const UseEraseData = ()=>{
         axios
         .delete(url, header)
         .then((res)=>{
-            setIsLoading(false)
             setData(res)
-            console.log('res', res)
-            setTimeout(()=>{
-                callBackRes()},500)
+            setIsLoading(false)
+            callBackRes(res.data)
         })
         .catch((err)=>{
-            setIsLoading(false)
             setError(err)
-            console.log('error', err)
-            callBackError()
+            setIsLoading(false)
+            callBackError(err)
         })
     }
 
