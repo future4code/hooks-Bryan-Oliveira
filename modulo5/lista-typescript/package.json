@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "tsc && npm test",
+    "ex1": "tsc ./src/ex1/ex1.ts && npm test ./src/ex1/ex1.test.js",
+    "ex2": "tsc ./src/ex2/ex2.ts && npm test ./src/ex2/ex2.test.js",
+    "ex3": "tsc ./src/ex3/ex3.ts && npm test ./src/ex3/ex3.test.js",
+    "ex4": "tsc ./src/ex4/ex4.ts && npm test ./src/ex4/ex4.test.js",
+    "ex5": "tsc ./src/ex5/ex5.ts && npm test ./src/ex5/ex5.test.js",
+    "ex6": "tsc ./src/ex6/ex6.ts && npm test ./src/ex6/ex6.test.js"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +21,8 @@
     "jest": "^28.1.3"
   },
   "dependencies": {
-    "@types/jest": "^28.1.6"
+    "@types/jest": "^28.1.6",
+    "ts-jest": "^28.0.7",
+    "ts-node": "^10.9.1"
   }
 }

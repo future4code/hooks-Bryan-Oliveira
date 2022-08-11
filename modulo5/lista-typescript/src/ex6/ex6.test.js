@@ -1,5 +1,5 @@
-const Export = require('./ex6.js')
-const { updateDebts, returnNegativeBalance, customers} = Export
+const ExportEx6 = require('./ex6.js')
+const { updateDebts, returnNegativeBalance, customers} = ExportEx6
 describe('it should return only customers with neagtive balance',()=>{
     test('it should update balance', ()=>{
         

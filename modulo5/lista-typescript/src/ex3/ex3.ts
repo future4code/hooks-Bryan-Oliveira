@@ -1,6 +1,10 @@
 // exercicio 3:
 
-const movies = (name, year, genrer, rate) => {
+const movies = (
+    name: string,
+    year: number, 
+    genrer: string, 
+    rate?: number): object => {
     const GENERO = {
         ACAO:"ação",
         DRAMA:"drama",
@@ -13,6 +17,4 @@ const movies = (name, year, genrer, rate) => {
     {nome: name, anoLancamento: year, genero: genrer, pontuacao: rate} 
     :
     {nome: name, anoLancamento: year, genero: genrer}
-
-
 }

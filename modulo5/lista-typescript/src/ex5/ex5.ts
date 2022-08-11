@@ -9,10 +9,10 @@
         {name: "Carina", email: "carina@email.com", role: "admin"}      
     ] 
 
-    const returnAdminUsers = (array)=>{
+    function returnAdminUsers (array: Array<any>): Array<any> {
         return array.filter( user => user.role==='admin' ).map( user => user.email )
     }
 
-    const Export = { users, returnAdminUsers}
+    const ExportEx5 = { users, returnAdminUsers}
 
-    module.exports = Export
+    module.exports = ExportEx5

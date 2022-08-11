@@ -1,5 +1,5 @@
-const Export = require('./desafio1.js')
-const { adjustPrice, inventory, adjustInventory, sorByQuantity } = Export
+const ExportDs1 = require('./desafio1.js')
+const { adjustPrice, inventory, adjustInventory, sorByQuantity } = ExportDs1
 describe('desafio 1',() => {
     test('it shlould adjust price param for a BR format',()=>{
         const Test = 55

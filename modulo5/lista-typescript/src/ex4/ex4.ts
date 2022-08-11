@@ -10,11 +10,11 @@
         { nome: "Paola" ,salário: 3500, setor: "marketing", presencial: true }
     ]
 
-    const returnMarketing = (array) =>{
+    const returnMarketing = (array: Array<any>) =>{
         return array.filter(colaborator => colaborator.setor === 'marketing' && colaborator.presencial)
     }
 
     console.log(returnMarketing(colaborators))
     
-    const Export = {returnMarketing, colaborators}
-    module.exports = Export;
+    const ExportEx4 = {returnMarketing, colaborators}
+    module.exports = ExportEx4;

@@ -1,4 +1,4 @@
-const adjustPrice = (preco) => {
+const adjustPrice = (preco: number) => {
 	const valorAjustado = preco.toFixed(2).replace('.', ',')
 	return "R$ "+valorAjustado
 }
@@ -13,18 +13,20 @@ const inventory = [
 	{ nome: "Pokebola", quantidade: 200, valorUnitario: 99.9915}
 ]
 
-const sorByQuantity = (a,b) => a.quantidade-b.quantidade
+const sorByQuantity = (a: {nome: string, quantidade: number, valorUnitario: number},
+	b: {nome: string, quantidade: number, valorUnitario: number}) => a.quantidade-b.quantidade
 
-const adjustInventory = (array) => {
+const adjustInventory = (array: any) => {
 	return array
-	.map(item => { return { ...item, valorUnitario: adjustPrice(item.valorUnitario)}})
+	.map((item: {nome: string, quantidade: number, valorUnitario: number}) => { return { ...item, valorUnitario: adjustPrice(item.valorUnitario)}})
+	// @ts-ignore
 	.sort(sorByQuantity)
 }
 
 // console.log(adjustInventory(inventory))
 
-const Export = {
+const ExportDs1 = {
 	adjustPrice, inventory, adjustInventory, sorByQuantity
 }
 
-module.exports = Export
+module.exports = ExportDs1
