@@ -1,5 +1,6 @@
+"use strict";
 // exercicio 4:
-var colaborators = [
+const colaborators = [
     { nome: "Marcos", salário: 2500, setor: "marketing", presencial: true },
     { nome: "Maria", salário: 1500, setor: "vendas", presencial: false },
     { nome: "Salete", salário: 2200, setor: "financeiro", presencial: true },
@@ -8,9 +9,10 @@ var colaborators = [
     { nome: "Natalia", salário: 4700, setor: "vendas", presencial: true },
     { nome: "Paola", salário: 3500, setor: "marketing", presencial: true }
 ];
-var returnMarketing = function (array) {
-    return array.filter(function (colaborator) { return colaborator.setor === 'marketing' && colaborator.presencial; });
+const returnMarketing = (array) => {
+    return array.filter(colaborator => colaborator.setor === 'marketing' && colaborator.presencial);
 };
 console.log(returnMarketing(colaborators));
-var Export = { returnMarketing: returnMarketing, colaborators: colaborators };
-module.exports = Export;
+const ExportEx4 = { returnMarketing, colaborators };
+module.exports = ExportEx4;
+//# sourceMappingURL=ex4.js.map

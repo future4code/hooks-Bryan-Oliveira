@@ -1,6 +1,12 @@
 // exercicio 5:
 
-    const users =  [
+type Users = {
+    name: string,
+    email: string,
+    role: string
+}
+
+    const users: Users[] =  [
         {name: "Rogério", email: "roger@email.com", role: "user"},
         {name: "Ademir", email: "ademir@email.com", role: "admin"},
         {name: "Aline", email: "aline@email.com", role: "user"},
@@ -9,7 +15,7 @@
         {name: "Carina", email: "carina@email.com", role: "admin"}      
     ] 
 
-    function returnAdminUsers (array: Array<any>): Array<any> {
+    function returnAdminUsers (array: Users[]): string[] {
         return array.filter( user => user.role==='admin' ).map( user => user.email )
     }
 

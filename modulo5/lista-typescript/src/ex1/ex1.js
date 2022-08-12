@@ -1,13 +1,15 @@
+"use strict";
 // exercício 1:
-var returnBornDate = function (name, bornDate) {
-    var splitedDate = bornDate.split('/');
-    var day = Number(splitedDate[0]);
-    var month = Number(splitedDate[1]);
-    var year = splitedDate[2];
-    var dateIncorrectFormat = "passe a data no formato correto (dd/mm/aaaa)";
-    var correctPhrase = "\"Ol\u00E1 me chamo ".concat(name, ", nasci no dia ").concat(day, " do m\u00EAs de ").concat(month, " do ano de ").concat(year, "\"");
+const returnBornDate = (name, bornDate) => {
+    const splitedDate = bornDate.split('/');
+    const day = Number(splitedDate[0]);
+    const month = Number(splitedDate[1]);
+    const year = splitedDate[2];
+    const dateIncorrectFormat = `passe a data no formato correto (dd/mm/aaaa)`;
+    const correctPhrase = `"Olá me chamo ${name}, nasci no dia ${day} do mês de ${month} do ano de ${year}"`;
     if (day > 31 || !month || month > 12 || year.length !== 4)
-        return "".concat(dateIncorrectFormat);
-    return "".concat(correctPhrase);
+        return dateIncorrectFormat;
+    return `${correctPhrase}`;
 };
 module.exports = returnBornDate;
+//# sourceMappingURL=ex1.js.map

@@ -1,4 +1,4 @@
-const returnBornDate = require('../../build/ex1/ex1.js')
+const returnBornDate = require('./ex1.js')
 
 describe('it should receive a name (string) and a born date (string) in format dd/mm/yyyy, and it should return the name and splited born date', ()=>{
     const name = 'bryan'
@@ -23,3 +23,6 @@ describe('it should receive a name (string) and a born date (string) in format d
         expect(returnBornDate('bryan', `${day}/${incorrectMonthFormat}/${year}`)).toBe(dateIncorrectFormat)
     })
 })
+
+
+

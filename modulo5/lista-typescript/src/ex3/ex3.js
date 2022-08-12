@@ -1,6 +1,7 @@
+"use strict";
 // exercicio 3:
-var movies = function (name, year, genrer, rate) {
-    var GENERO = {
+const movies = (name, year, genrer, rate) => {
+    const GENERO = {
         ACAO: "ação",
         DRAMA: "drama",
         COMEDIA: "comédia",
@@ -12,3 +13,4 @@ var movies = function (name, year, genrer, rate) {
         :
             { nome: name, anoLancamento: year, genero: genrer };
 };
+//# sourceMappingURL=ex3.js.map
