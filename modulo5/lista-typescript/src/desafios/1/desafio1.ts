@@ -1,9 +1,15 @@
+type Item = {
+	nome: string,
+	quantidade: number,
+	valorUnitario: number | string
+}
+
 const adjustPrice = (preco: number) => {
 	const valorAjustado = preco.toFixed(2).replace('.', ',')
 	return "R$ "+valorAjustado
 }
 
-const inventory = [
+const inventory: Item[] = [
 	{ nome: "MacMugffin", quantidade: 37, valorUnitario: 51.040},
 	{ nome: "Vassoura voadora", quantidade: 56, valorUnitario: 210.0},
 	{ nome: "Laço da verdade", quantidade: 32, valorUnitario: 571.5},
@@ -13,17 +19,13 @@ const inventory = [
 	{ nome: "Pokebola", quantidade: 200, valorUnitario: 99.9915}
 ]
 
-const sorByQuantity = (a: {nome: string, quantidade: number, valorUnitario: number},
-	b: {nome: string, quantidade: number, valorUnitario: number}) => a.quantidade-b.quantidade
+const sorByQuantity = (a: Item,b: Item) => a.quantidade-b.quantidade
 
-const adjustInventory = (array: any) => {
+const adjustInventory = (array: Item[]) => {
 	return array
-	.map((item: {nome: string, quantidade: number, valorUnitario: number}) => { return { ...item, valorUnitario: adjustPrice(item.valorUnitario)}})
-	// @ts-ignore
+	.map((item) => { return { ...item, valorUnitario: adjustPrice(item.valorUnitario as number)}})
 	.sort(sorByQuantity)
 }
-
-// console.log(adjustInventory(inventory))
 
 const ExportDs1 = {
 	adjustPrice, inventory, adjustInventory, sorByQuantity

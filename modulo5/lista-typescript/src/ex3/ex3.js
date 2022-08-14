@@ -1,16 +1,16 @@
-"use strict";
 // exercicio 3:
-const movies = (name, year, genrer, rate) => {
-    const GENERO = {
-        ACAO: "ação",
-        DRAMA: "drama",
-        COMEDIA: "comédia",
-        ROMANCE: "romance",
-        TERROR: "terror"
-    };
+var GENERO;
+(function (GENERO) {
+    GENERO["ACAO"] = "a\u00E7\u00E3o";
+    GENERO["DRAMA"] = "drama";
+    GENERO["COMEDIA"] = "com\u00E9dia";
+    GENERO["ROMANCE"] = "romance";
+    GENERO["TERROR"] = "terror";
+})(GENERO || (GENERO = {}));
+var movies = function (name, year, genrer, rate) {
     return rate ?
         { nome: name, anoLancamento: year, genero: genrer, pontuacao: rate }
         :
             { nome: name, anoLancamento: year, genero: genrer };
 };
-//# sourceMappingURL=ex3.js.map
+module.exports = { movies: movies, GENERO: GENERO };

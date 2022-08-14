@@ -14,7 +14,6 @@
         return array.filter(colaborator => colaborator.setor === 'marketing' && colaborator.presencial)
     }
 
-    console.log(returnMarketing(colaborators))
     
     const ExportEx4 = {returnMarketing, colaborators}
     module.exports = ExportEx4;
