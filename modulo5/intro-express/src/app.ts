@@ -20,13 +20,35 @@ app.get("/posts/", (req, res) => {
   res.send(posts)
 })
 
-app.get("/posts/:user_id", (req, res) => {          
-  const userId = Number(req.params.user_id)
+app.get("/posts/:userId", (req, res) => {          
+  const userId = Number(req.params.userId)
 
   const userMatched = users.filter( user => user.id === userId )
   const posts = userMatched.map( user => user.posts ).flat(1)
 
   res.send(posts)
+})
+
+app.delete("/posts/:userId", (req, res) => {          
+  const userId = Number(req.params.userId)
+
+  const newUsers = users.map( user => {
+    if(userId !== user.id) return user
+    return {...user, posts: []} 
+  }).flat(1)
+  
+  res.send(newUsers)
+})
+
+app.delete("/users/:userId", (req, res) => {          
+  const userId = Number(req.params.userId)
+
+  const newUsers = users.map( user => {
+    if(userId !== user.id) return user
+    return {} 
+  }).flat(1)
+
+  res.send(newUsers)
 })
 
 app.listen(3003, () => {
