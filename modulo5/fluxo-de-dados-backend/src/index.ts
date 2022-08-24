@@ -40,7 +40,7 @@ app.post('/product', (req: Request, res: Response)=>{
 
         statusCode = 201
 
-        const product: Product = {name, price, id: uuidv4()}
+        const product: Product = {name, price: Number(price), id: uuidv4()}
         products.push(product)
 
         res.status(statusCode).send(products)
@@ -51,12 +51,18 @@ app.post('/product', (req: Request, res: Response)=>{
 })
 
 app.get("/products",(req: Request, res: Response)=>{
-    res.status(200).send(products)
+    const { search } = req.query
+
+    if(!search) res.status(200).send(products)
+    
+    const productMatched = products.find( product => product.name === search ) 
+
+    res.status(200).send(productMatched)
 })
 
 app.put("/product/:id/price", (req: Request, res: Response)=>{
     const {id} = req.params
-    const {price} = req.body
+    const {price, name} = req.body
     let statusCode: number = 0;
     try {
         if(!id){
@@ -64,17 +70,22 @@ app.put("/product/:id/price", (req: Request, res: Response)=>{
             throw new Error("passe o id por path param")
         }
 
-        if(!price){
+        if(!price && !name){
             statusCode = 422
-            throw new Error("o campo price e obrigatorio")
+            throw new Error("pelo menos um campos deve ser inserido para ser alterado (name, price)")
         }
 
-        if(!Number(price)){
+        if(name && Number(name) || typeof(name)!== "string"){
+            statusCode = 422
+            throw new Error("o campo name deve ser uma string")
+        }
+
+        if(price && !Number(price)){
             statusCode = 422
             throw new Error("price deve ser um numero")
         }
 
-        if(price<=0){
+        if(price && price<=0){
             statusCode = 422
             throw new Error("o campo price deve ser maior que 0")
         }
@@ -87,7 +98,10 @@ app.put("/product/:id/price", (req: Request, res: Response)=>{
         }
 
         statusCode = 200
-        productMatched.price = price
+
+        if(price) productMatched.price = Number(price)
+
+        if(name) productMatched.name = name
         
         res.status(statusCode).send(products)
     } catch (error: any) {
