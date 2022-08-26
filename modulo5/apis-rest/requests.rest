@@ -1,0 +1,36 @@
+###
+GET http://localhost:3003/users
+
+###
+GET http://localhost:3003/users?type=normal
+
+###
+GET http://localhost:3003/users?type=admin
+
+###
+GET http://localhost:3003/users?name=fred
+
+###
+GET http://localhost:3003/users?name=fred&&type=normal
+
+###
+post http://localhost:3003/user 
+Content-Type: application/json
+
+{
+    "name": "bryan",
+    "type": "ADMIN",
+    "age": 22,
+    "email": "bryan@gmail.com"
+}
+
+###
+put http://localhost:3003/user/last
+
+###
+PATCH  http://localhost:3003/user/last
+
+###
+DELETE   http://localhost:3003/user/3
+
+
