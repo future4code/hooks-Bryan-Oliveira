@@ -2,7 +2,7 @@ import { users } from "../data"
 import { isValidCPF, howManyYears } from "../helpers/helpers"
 
 export const lessThan18Err = 'para cirar uma conta o usuário deve ter 18 ou mais anos de idade'
-export const invalidCpfErr = 'cpf invalido!'
+export const invalidCpfErr = 'cpf invalido! formato (xxx.xxx.xxx-xx) ou números incorretos!'
 export const incorrectDateFormatErr = 'passe a data no formato dd/mm/aaaa'
 export const duplicatedCpfErr = 'já existe uma conta com esse cpf'
 

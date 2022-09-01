@@ -1,0 +1,51 @@
+
+###
+GET http://localhost:3003/users
+
+###
+GET http://localhost:3003/users/user
+Content-Type: application/json
+
+{
+    "cpf": "145.382.206-20"
+}
+
+###
+GET http://localhost:3003/users/user/balance
+Content-Type: application/json
+
+{
+    "cpf": "145.382.206-20"
+}
+
+###
+POST  http://localhost:3003/users/user
+Content-Type: application/json
+
+{
+    "name": "Laura",
+    "cpf": "535.746.351-41",
+    "birthDate": "14/09/2000"
+}
+
+###
+POST  http://localhost:3003/users/transfer
+Content-Type: application/json
+
+{
+    "senderName": "Laura",
+    "senderCpf": "535.746.351-41",
+    "receiverName": "Bryan",
+    "receiverCpf": "145.382.206-20",
+    "value": 100
+}
+
+###
+PUT http://localhost:3003/users/user
+Content-Type: application/json
+
+{
+    "name": "Laura",
+    "cpf": "535.746.351-41",
+    "value": 100
+}

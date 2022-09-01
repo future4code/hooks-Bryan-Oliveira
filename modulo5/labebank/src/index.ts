@@ -26,11 +26,10 @@ export function createAccount (name:string, cpf:string, birthDate:string): User[
     return users
 }
 
-
-export function getBalance(name: string, cpf: string): number{
-    const userMatched = users.find( user => user.cpf === cpf && user.name.toLowerCase() === name.toLowerCase())
+export function getBalance(name: string | undefined, cpf: string): number{
+    const userMatched = users.find( user => user.cpf === cpf )
     
-    getBalanceValidator(name, cpf, userMatched)
+    getBalanceValidator( cpf, userMatched)
 
     return (userMatched as User).balance
 }
@@ -46,7 +45,7 @@ export function addBalance(name: string, cpf: string, value: number): string {
         }
     })
 
-    return `saldo atual ${adjustPrice((userMatched as User).balance)}`
+    return `Valor adicionado: ${adjustPrice(value)},  saldo atual: ${adjustPrice((userMatched as User).balance)}`
 }
 
 export function payBill( name: string , cpf: string, value: number, description?: string, date?: string,){
