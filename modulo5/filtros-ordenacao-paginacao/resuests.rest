@@ -1,0 +1,14 @@
+###
+GET http://localhost:3003
+
+###
+GET http://localhost:3003?name=c
+
+###
+GET http://localhost:3003?type=teacher
+
+###
+GET http://localhost:3003?sort=name
+
+###
+GET http://localhost:3003?sort=name&order=desc
