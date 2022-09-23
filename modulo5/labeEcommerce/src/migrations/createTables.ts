@@ -1,13 +1,10 @@
 import { connection } from "../../connection";
-
-export const tableUsersName =  'Labecommerce_users'
-export const tableProductsName =  'Labecommerce_products'
-export const tablePurchasesName =  'labecommerce_purchases'
+import { tableProductsName, tablePurchasesName, tableUsersName } from "./tableNames";
 
 const createTableUsers =async () => {
     try {
         await connection.raw(`
-            CREATE TABLE IF NOT EXIST ${tableUsersName} (
+            CREATE TABLE ${tableUsersName} (
                 id VARCHAR(255) PRIMARY KEY,
                 name VARCHAR(10) NOT NULL,
                 email VARCHAR(50) UNIQUE NOT NULL,
@@ -24,7 +21,7 @@ const createTableUsers =async () => {
 const createTableProducts =async () => {
     try {
         await connection.raw(`
-            CREATE TABLE IF NOT EXIST ${tableProductsName} (
+            CREATE TABLE ${tableProductsName} (
                 id VARCHAR(255) PRIMARY KEY,
                 name VARCHAR(50) UNIQUE NOT NULL,
                 price DECIMAL(8,2) NOT NULL,
@@ -42,7 +39,7 @@ const createTablePurchases =async () => {
     
     try{
         await connection.raw(`
-               CREATE TABLE IF NOT EXIST ${tablePurchasesName} (
+               CREATE TABLE ${tablePurchasesName} (
                id VARCHAR(255) PRIMARY KEY,
                user_id VARCHAR(255) NOT NULL,
                product_id VARCHAR(255) NOT NULL,
@@ -59,3 +56,10 @@ const createTablePurchases =async () => {
         console.log(error.sqlMessage)
     }
 }
+
+
+
+createTableUsers()
+.then(()=> createTableProducts())
+.then(()=> createTablePurchases())
+.finally(()=> process.exit())
