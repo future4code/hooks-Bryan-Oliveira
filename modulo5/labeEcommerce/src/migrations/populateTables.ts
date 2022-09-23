@@ -8,8 +8,8 @@ const populateTableUsers = async () => {
         await connection.raw(`
         INSERT INTO ${tableUsersName} (id, name, email, password)
         VALUES
-        ('${uuid()}', 'bryan', 'bryan@email.com', '123456'),
-        ('${uuid()}', 'brenda', 'brenda@email.com', '123456');
+        ('1', 'bryan', 'bryan@email.com', '123456'),
+        ('2', 'brenda', 'brenda@email.com', '123456');
         `)
 
         console.log(`tabela ${tableUsersName} populada com sucesso!`)
@@ -23,8 +23,8 @@ const populateTableProducts = async () => {
         await connection.raw(`
         INSERT INTO ${tableProductsName} (id, name, price, image_url)
         VALUES
-        ('${uuid()}', 'nave-espacial', 10.00 , ''),
-        ('${uuid()}', 'carrinho-espacial', 8.50, '');
+        ('1', 'nave-espacial', 10.00 , ''),
+        ('2', 'carrinho-espacial', 8.50, '');
         `)
 
         console.log(`tabela ${tableProductsName} populada com sucesso!`)
@@ -42,10 +42,10 @@ const populateTablePurchases = async () => {
         await connection.raw(`
         INSERT INTO ${tablePurchasesName} (id, user_id, product_id, quantity, total_price)
         VALUES
-        ('${uuid()}', '${usersIds[0].id}', '${products[0].id}', 5, '${5 * products[0].price}' ),
-        ('${uuid()}', '${usersIds[0].id}', '${products[1].id}', 5, '${5 * products[0].price}' ),
-        ('${uuid()}', '${usersIds[1].id}', '${products[0].id}', 5, '${5 * products[0].price}' ),
-        ('${uuid()}', '${usersIds[1].id}', '${products[1].id}', 5, '${5 * products[0].price}' );
+        ('1', '${usersIds[0].id}', '${products[0].id}', 5, '${5 * products[0].price}' ),
+        ('2', '${usersIds[0].id}', '${products[1].id}', 5, '${5 * products[0].price}' ),
+        ('3', '${usersIds[1].id}', '${products[0].id}', 5, '${5 * products[0].price}' ),
+        ('4', '${usersIds[1].id}', '${products[1].id}', 5, '${5 * products[0].price}' );
         `)
 
         console.log(`tabela ${tablePurchasesName} populada com sucesso!`)
