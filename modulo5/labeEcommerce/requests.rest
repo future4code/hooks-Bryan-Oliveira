@@ -1,0 +1,39 @@
+###
+GET http://localhost:3003/users
+
+###
+POST http://localhost:3003/users
+Content-Type: application/json
+
+{
+    "name": "Bryan",
+    "email": "bryanfernandes8@gmail.com",
+    "password": "123456"
+}
+
+###
+GET http://localhost:3003/products?order=desc
+
+###
+POST http://localhost:3003/products
+Content-Type: application/json
+
+{
+    "name": "teste2",
+    "price": 0.5,
+    "image_url": "https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ"
+}
+
+###
+GET http://localhost:3003/purchases
+
+###
+POST http://localhost:3003/purchases
+Content-Type: application/json
+
+{
+    "userId": "1",
+    "productId": "1",
+    "quantity": 50
+}
+
