@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import connection from "../database/connection"
 import { TABLE_USERS } from "../database/tableNames"
-import { User } from "../models/User"
+import { User, UserDatabase } from "../models/User"
 
 export const createUser = async (req: Request, res: Response) => {
     let errorCode = 400
@@ -12,19 +12,20 @@ export const createUser = async (req: Request, res: Response) => {
         if (!email || !password) {
             throw new Error("Body inválido.")
         }
+        const userDatabase: UserDatabase = new UserDatabase()
 
-        const newUser: User = {
-            id: Date.now().toString(),
-            email,
-            password
+        const duplicatedEmail = await userDatabase.getUserByEmail(email)
+
+        if(duplicatedEmail.length){
+           throw new Error("email já cadastrado");
+            
         }
-
-        await connection(TABLE_USERS).insert({
-            id: newUser.id,
-            email: newUser.email,
-            password: newUser.password
-        })
         
+        const id = Date.now().toString()
+        const newUser: User = new User(id, email, password)
+        
+        await userDatabase.createUser(newUser)
+
         res.status(201).send({ message: "Usuário criado", user: newUser })
     } catch (error) {
         res.status(errorCode).send({ message: error.message })
