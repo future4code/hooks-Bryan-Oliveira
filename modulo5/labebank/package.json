@@ -1,0 +1,21 @@
+{
+  "name": "labebank",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "tsc && jest",
+    "test-create-account": "tsc && npm test ./src/tests/createAccount.test.js",
+    "test-get-balance": "tsc && jest ./src/tests/getBalance.test.js",
+    "test-add-balance": "tsc && jest ./src/tests/addBalance.test.js",
+    "test-pay-bill": "tsc && jest ./src/tests/payBill.test.js",
+    "test-intern-transfer": "tsc && jest ./src/tests/internTransfer.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.0.1"
+  }
+}
