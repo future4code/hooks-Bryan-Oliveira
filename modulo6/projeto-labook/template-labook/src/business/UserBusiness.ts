@@ -1,5 +1,6 @@
 import { NewUserInput, User } from "../model/User"
 import { UserDatabase } from "../data/UserDatabase"
+import { FriendshipDatabase } from "../data/FriendsDatabase"
 
 
 
@@ -40,7 +41,10 @@ export class UserBusiness{
 
      async getUserFeed(id: string){
         try {
-            const result = await UserDatabase.getUserPosts(id)
+            const friendships = await FriendshipDatabase.getUserFriendships(id)
+            const friends: string[] = friendships.map(friendship => friendship?.user1_id? friendship.user1_id : friendship.user2_id)
+            
+            const result = await UserDatabase.getUserFeed(friends)
             return result
         } catch (error: any) {
          throw new Error(error.sqlMessage || error.message);

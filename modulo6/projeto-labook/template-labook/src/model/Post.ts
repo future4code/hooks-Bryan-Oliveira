@@ -1,4 +1,5 @@
 import { isValidDate } from "../services/isValidDate";
+import { isValidStringDate } from "../services/isValidStringDate";
 import { BaseEntity } from "./BaseEntity";
 
 export enum POST_TYPES {
@@ -11,7 +12,7 @@ export enum POST_TYPES {
      description: string,
     photo: string,
     type: POST_TYPES,
-    createdAt: string | Date
+    createdAt: string | Date | undefined
  }
 
 export class Post extends BaseEntity{
@@ -20,7 +21,7 @@ export class Post extends BaseEntity{
         private description: string,
         private photo: string,
         private type?: POST_TYPES,
-        private created_at?: Date,
+        private created_at?: Date | string,
         id?: string,
     ){
         super(id)
@@ -33,7 +34,8 @@ export class Post extends BaseEntity{
 
         try {
             
-            if(typeof(createdAt)==='string' && !isValidDate(createdAt)) throw new Error("must pass a valid ate format");
+            if(typeof(createdAt)==='string' && !isValidStringDate(createdAt)) throw new Error("must pass a valid date format");
+            if(createdAt instanceof Date && !isValidDate(createdAt))throw new Error("must pass a valid date format"); 
             if(!createdAt) createdAt = new Date()
             
             createdAt = new Date(createdAt)

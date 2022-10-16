@@ -34,8 +34,8 @@ Content-Type: application/json
     "photo": "teste",
     "description": "teste",
     "type": "normal",
-    "authorId": "07b28fe0-a48e-4fce-80a3-513dc0aaf121",
-    "createdAt": "teste"
+    "authorId": "d73f114e-e1fb-4f31-995b-0a69144adf38"
+    # "createdAt": 
 }
 
 ###

@@ -1,6 +1,6 @@
 import { PostDatabase } from "../data/PostDatabase"
 import { NewPostInput, Post, POST_TYPES } from "../model/Post"
-import { isValidDate } from "../services/isValidDate";
+import { isValidStringDate } from "../services/isValidStringDate";
 
 export class PostBusiness{
     async createPost(newPostInput: NewPostInput){
@@ -14,9 +14,9 @@ export class PostBusiness{
             if(type.toLowerCase()!== POST_TYPES.NORMAL &&
                 type.toLowerCase()!== POST_TYPES.EVENT) throw new Error('type must be "normal" or "event"');
 
-            if(createdAt && !isValidDate(createdAt as string)) throw new Error("createdAt must be in Date format");
+            if(createdAt && !isValidStringDate(createdAt as string)) throw new Error("createdAt must be in Date format");
             
-            createdAt = new Date(createdAt)
+            // createdAt = new Date(createdAt)
 
             const newPost: Post = new Post(authorId, description, photo, type, createdAt)
 

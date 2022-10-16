@@ -1,5 +1,3 @@
-export function isValidDate(dateInput: string ):boolean{
-    const timestamp = Date.parse(dateInput)
-
-    return !isNaN(timestamp)
-}
+export function isValidDate(data: Date) {
+    return data instanceof Date && !isNaN(data.getMilliseconds());
+  }

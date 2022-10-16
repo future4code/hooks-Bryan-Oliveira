@@ -67,8 +67,25 @@ export class UserDatabase extends BaseDatabase{
     static async getUserPosts(id: string): Promise<any[]>{
         try {
             const posts = await UserDatabase.connection(`${UserDatabase.TABLE_NAME} as user`)
-                                                .join(`${PostDatabase.TABLE_NAME} as post`, `post.author_id`, '=', `user.id`
-                                                  ).select('post.id','post.photo', 'post.type',  'post.description', 'post.created_at', 'post.author_id' )
+                                                .where({'user.id': id})
+                                                .join(`${PostDatabase.TABLE_NAME} as post`, `post.author_id`, '=', `user.id`)
+                                                .select('post.id','post.photo', 'post.type',  'post.description', 'post.created_at', 'post.author_id' )
+
+
+            return posts
+        } catch (error: any) {
+            throw new Error(error.sqlMessage || error.message);
+            
+        }
+    }
+
+    static async getUserFeed(friendsIds: string[]){
+        try {
+            const posts = await UserDatabase.connection(`${UserDatabase.TABLE_NAME} as user`)
+                                .where( builder => builder.whereIn('user.id', friendsIds))
+                                .join(`${PostDatabase.TABLE_NAME} as post`, `post.author_id`, '=', `user.id`)
+                                .select('post.id','post.photo', 'post.type',  'post.description', 'post.created_at', 'post.author_id' )
+                                .orderBy('post.created_at', 'desc')
 
 
             return posts
