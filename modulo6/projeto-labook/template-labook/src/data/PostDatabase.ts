@@ -1,4 +1,4 @@
-import { Post } from "../model/Post";
+import { GetAllDTO, Post, POST_TYPES } from "../model/Post";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class PostDatabase extends BaseDatabase{
@@ -15,9 +15,13 @@ export class PostDatabase extends BaseDatabase{
         }
     }
 
-    static async getAll(): Promise<Post[]>{
+    static async getAll(type?: POST_TYPES): Promise<Post[]>{
         try {
+
             const posts: Post[] =  await PostDatabase.connection(PostDatabase.TABLE_NAME).select<any, Post[]>()
+                                            .where(function() {
+                                                type && this.where({type})
+                                              })
 
             return posts
         } catch (error: any) {
@@ -28,7 +32,8 @@ export class PostDatabase extends BaseDatabase{
 
     static async getById(id: string): Promise<Post>{
         try {
-             const post: Post[]  = await PostDatabase.connection(PostDatabase.TABLE_NAME).select<any, Post[]>().where({id})
+             const post: Post[]  = await PostDatabase.connection(PostDatabase.TABLE_NAME).select<any, Post[]>()
+                                            .where({id})
 
             return post[0]
         } catch (error: any) {

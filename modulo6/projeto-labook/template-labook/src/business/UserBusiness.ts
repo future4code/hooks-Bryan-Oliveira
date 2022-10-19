@@ -31,6 +31,7 @@ export class UserBusiness{
      async getAll(): Promise<User[]>{
       try {
         const users: User[] =  await UserDatabase.getAll()
+
         if(!users.length) throw new Error("not found");
         return users
       } catch (error: any) {
@@ -39,12 +40,13 @@ export class UserBusiness{
       }
      }
 
-     async getUserFeed(id: string){
+     async getUserFeed(id: string, page?: number){
         try {
+            page = isNaN(Number(page))? 1 : page             
             const friendships = await FriendshipDatabase.getUserFriendships(id)
             const friends: string[] = friendships.map(friendship => friendship?.user1_id? friendship.user1_id : friendship.user2_id)
             
-            const result = await UserDatabase.getUserFeed(friends)
+            const result = await UserDatabase.getUserFeed(friends, page)
             return result
         } catch (error: any) {
          throw new Error(error.sqlMessage || error.message);

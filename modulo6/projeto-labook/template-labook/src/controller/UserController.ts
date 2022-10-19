@@ -43,7 +43,8 @@ export class UserController{
      async getUserFeed(req: Request, res: Response): Promise<void>{
       try {
          const id = req.params.id
-         const result = await UserController.userBusinness.getUserFeed(id)
+         const page: number = Number(req.query.page)
+         const result = await UserController.userBusinness.getUserFeed(id, page)
 
          res.send(result)
       } catch (error: any) {

@@ -30,8 +30,9 @@ export class PostController{
 
      async getAllPosts(req: Request, res: Response):Promise<void> {
         try {
+            const type: POST_TYPES = req.query.type as POST_TYPES
 
-            const posts = await PostController.postBusiness.getAllPosts()
+            const posts = await PostController.postBusiness.getAllPosts(type)
 
             res.status(200).send({posts})
             

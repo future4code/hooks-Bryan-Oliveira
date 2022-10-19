@@ -16,7 +16,7 @@ export class UserDatabase extends BaseDatabase{
         }
     }
 
-    static async getById(id:string): Promise<any>{
+    static async getById(id:string): Promise<any[]>{
         try {
            const user =  await UserDatabase.connection(UserDatabase.TABLE_NAME).where({id}).select()
 
@@ -79,13 +79,16 @@ export class UserDatabase extends BaseDatabase{
         }
     }
 
-    static async getUserFeed(friendsIds: string[]){
+    static async getUserFeed(friendsIds: string[], page?: number){
         try {
+            page = page? page : 1
             const posts = await UserDatabase.connection(`${UserDatabase.TABLE_NAME} as user`)
                                 .where( builder => builder.whereIn('user.id', friendsIds))
                                 .join(`${PostDatabase.TABLE_NAME} as post`, `post.author_id`, '=', `user.id`)
                                 .select('post.id','post.photo', 'post.type',  'post.description', 'post.created_at', 'post.author_id' )
                                 .orderBy('post.created_at', 'desc')
+                                .limit(5)
+                                .offset(5 * page)
 
 
             return posts

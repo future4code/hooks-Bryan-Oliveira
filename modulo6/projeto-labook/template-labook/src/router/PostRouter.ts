@@ -6,7 +6,7 @@ const postController: PostController = new PostController
 
 postRouter.post('/create', postController.createPost)
 
-postRouter.get('/', postController.getAllPosts)
+postRouter.get('/getAll', postController.getAllPosts)
 postRouter.get('/:id', postController.getPostById)
 
 

@@ -28,9 +28,11 @@ export class PostBusiness{
          }
     }
 
-    async getAllPosts(): Promise<Post[]>{
+    async getAllPosts(type: POST_TYPES): Promise<Post[]>{
         try {
-           const posts =  await PostDatabase.getAll()
+            if(type.toLowerCase()!== POST_TYPES.NORMAL &&
+                type.toLowerCase()!== POST_TYPES.EVENT) throw new Error('type must be "normal" or "event"');
+           const posts =  await PostDatabase.getAll(type)
 
            if(!posts.length) throw new Error("no post found");
 

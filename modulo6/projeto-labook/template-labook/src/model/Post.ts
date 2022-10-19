@@ -15,6 +15,10 @@ export enum POST_TYPES {
     createdAt: string | Date | undefined
  }
 
+ export type GetAllDTO = {
+    type?: POST_TYPES
+ } 
+
 export class Post extends BaseEntity{
     constructor(
         private author_id: string,
@@ -29,6 +33,7 @@ export class Post extends BaseEntity{
         this.setCreatedAt(created_at)
         this.setType(type)
     }
+
 
     setCreatedAt(createdAt: Date | undefined | string): void{
 

@@ -45,6 +45,14 @@ static async migrations(): Promise<void>{
          user2_id  VARCHAR(255) NOT NULL,
          FOREIGN KEY (user1_id) REFERENCES labook_users (id),
          FOREIGN KEY (user2_id) REFERENCES labook_users (id)
+      );
+
+      CREATE TABLE IF NOT EXISTS labook_post_likes(
+         id VARCHAR(255) PRIMARY KEY,
+         post_id  VARCHAR(255) NOT NULL,
+         user_id  VARCHAR(255) NOT NULL,
+         FOREIGN KEY (post_id) REFERENCES labook_posts (id),
+         FOREIGN KEY (user_id) REFERENCES labook_users (id)
       )
    `)
    .then(console.log)
