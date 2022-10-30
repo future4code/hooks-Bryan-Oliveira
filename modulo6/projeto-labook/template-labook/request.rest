@@ -1,0 +1,51 @@
+###
+GET http://localhost:3003/user
+
+###
+GET http://localhost:3003/user/07b28fe0-a48e-4fce-80a3-513dc0aaf121/getFeed
+
+###
+GET http://localhost:3003/post
+
+###
+GET http://localhost:3003/post/f13ec21f-8ec3-402d-ac0c-302f0d1833d7
+
+###
+GET http://localhost:3003/friendship
+
+###
+GET http://localhost:3003/friendship/user/d73f114e-e1fb-4f31-995b-0a69144adf38
+
+###
+post http://localhost:3003/user/create
+Content-Type: application/json
+
+{
+    "name": "teste",
+    "email": "teste@email.com",
+    "password": "123456"
+}
+
+###
+POST http://localhost:3003/post/create 
+Content-Type: application/json
+
+{
+    "photo": "teste",
+    "description": "teste",
+    "type": "normal",
+    "authorId": "d73f114e-e1fb-4f31-995b-0a69144adf38"
+    # "createdAt": 
+}
+
+###
+post http://localhost:3003/friendship/create
+Content-Type: application/json
+
+{
+    "user1Id": "07b28fe0-a48e-4fce-80a3-513dc0aaf121",
+    "user2Id": "d73f114e-e1fb-4f31-995b-0a69144adf38"
+}
+
+###
+DELETE http://localhost:3003/friendship/b8507879-1a3a-4986-8664-9b966e295c7e
